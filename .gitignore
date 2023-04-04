@@ -1,0 +1,13 @@
+# Ignore object files and executables
+*.o
+*.out
+*.exe
+
+# Ignore certain SFML libary files
+sfml-network/
+
+
+# Ignore project files created by Visual Studio 
+
+# Ignore compiled game data
+bin/
