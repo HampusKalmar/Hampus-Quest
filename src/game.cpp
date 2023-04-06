@@ -1,10 +1,14 @@
-#include "../include/game.hpp"
+#include "../include/game.h"
+#include "../include/sound.h"
 
 void Game::gameWindow()
 {
+  Sound gameMusic;
+  gameMusic.menuMusic();
+
   sf::RenderWindow gameWindow(sf::VideoMode(1400, 900), "Hampus Quest");
 
-  window.setFramerateLimit(25);
+  window.setFramerateLimit(30);
 
   while (gameWindow.isOpen())
   {
@@ -16,7 +20,6 @@ void Game::gameWindow()
       }
     }
     gameWindow.clear(sf::Color(0, 0, 70));
-
     gameWindow.display();
   }
 }
