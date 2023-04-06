@@ -1,10 +1,14 @@
 #include "../include/game.h"
 #include "../include/sound.h"
+#include "../include/player.h"
 
 void Game::gameWindow()
 {
-  Sound gameMusic;
-  gameMusic.menuMusic();
+  Sound* sound = new Sound();
+  sound->menuMusic();
+
+  Player player;
+  player.printPlayerSprite();
 
   sf::RenderWindow gameWindow(sf::VideoMode(1400, 900), "Hampus Quest");
 
@@ -20,6 +24,8 @@ void Game::gameWindow()
       }
     }
     gameWindow.clear(sf::Color(0, 0, 70));
+    gameWindow.draw(player.getSprite());
     gameWindow.display();
   }
+  delete sound;
 }
