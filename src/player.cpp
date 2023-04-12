@@ -8,6 +8,7 @@ void Player::printPlayerSprite()
   sprite.setPosition(0, 730);
 }
 
+// Make the player jump
 void Player::jumpPlayer(float deltaTime)
 {
   float gravityDelta = gravity * deltaTime;
