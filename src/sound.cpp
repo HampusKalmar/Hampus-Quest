@@ -10,6 +10,6 @@ int Sound::menuMusic()
 
   music.play();
   music.setLoop(true);
-  music.setVolume(50);
+  music.setVolume(30);
   return 0;
 }
