@@ -8,8 +8,10 @@ void Player::printPlayerSprite()
   sprite.setPosition(0, 730);
 }
 
-void Player::jumpPlayer()
+void Player::jumpPlayer(float deltaTime)
 {
+  float gravityDelta = gravity * deltaTime;
+
   if (input.isUpKeyPressed())
   {
     if (!isJumping)
@@ -20,21 +22,36 @@ void Player::jumpPlayer()
     }
     else if (isJumping && velocity.y < 0.0f && airTime < maxAirTime)
     {
-      velocity.y -= gravity * deltaTime;
+      velocity.y -= gravityDelta;
     }
   }
-    if (isJumping)
-    {
-      velocity.y += gravity * deltaTime;
-      airTime += deltaTime;
+  
+  if (isJumping)
+  {
+    velocity.y += gravityDelta;
+    airTime += deltaTime;
     
-      if (airTime > maxAirTime || (velocity.y > 0 && sprite.getPosition().y >= 730.0f))
-      {
-        isJumping = false;
-        velocity.y = downVelocity;
-      }
+    if (airTime > maxAirTime || (velocity.y > 0 && sprite.getPosition().y >= 730.0f))
+    {
+      isJumping = false;
+      velocity.y = downVelocity;
     }
-    sprite.move(velocity * deltaTime);
+  }
+  sprite.move(velocity * deltaTime);
+
+  if (sprite.getPosition().y >= 730.0f)
+  {
+    sprite.setPosition(sprite.getPosition().x, 730.0f);
+    isJumping = false;
+    velocity.y = 0.0f;
+  }
+
+  if (isJumping && sprite.getPosition().y <= 730.0f - maxJumpHeight)
+  {
+    isJumping = false;
+    velocity.y = downVelocity;
+    airTime = downVelocity;
+  }
 }
 
 sf::Sprite Player::getSprite() const

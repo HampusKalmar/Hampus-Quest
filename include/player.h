@@ -17,13 +17,12 @@ class Player
     const float jumpVelocity = -600.0f;
     const float maxJumpHeight = 150.0f;
     const float maxAirTime = 2.2f;
-    float deltaTime;
     float airTime;
     bool isJumping = false;
 
   public:
     void printPlayerSprite();
-    void jumpPlayer();
+    void jumpPlayer(float deltaTime);
     sf::Sprite getSprite() const;
 };
 

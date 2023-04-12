@@ -14,8 +14,10 @@ void Game::gameWindow()
 
   window.setFramerateLimit(30);
 
+  sf::Clock clock;
   while (gameWindow.isOpen())
   {
+    sf::Time deltaTime = clock.restart();
     while (gameWindow.pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
@@ -24,7 +26,7 @@ void Game::gameWindow()
       }
     }
     gameWindow.clear(sf::Color(0, 0, 70));
-    player.jumpPlayer();
+    player.jumpPlayer(deltaTime.asSeconds());
     gameWindow.draw(player.getSprite());
     gameWindow.display();
   }
