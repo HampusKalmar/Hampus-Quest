@@ -24,6 +24,7 @@ void Game::gameWindow()
       }
     }
     gameWindow.clear(sf::Color(0, 0, 70));
+    player.jumpPlayer();
     gameWindow.draw(player.getSprite());
     gameWindow.display();
   }
