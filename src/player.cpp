@@ -74,6 +74,8 @@ void Player::updatePlayerMovement()
 {
   this->movePlayerRight();
   this->movePlayerLeft();
+  time = clock.restart();
+  this->jumpPlayer(time.asSeconds());
 }
 
 sf::Sprite Player::getSprite() const

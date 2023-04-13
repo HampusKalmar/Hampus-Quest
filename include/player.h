@@ -13,6 +13,8 @@ class Player
     sf::Sprite sprite;
     Input input;
     sf::Vector2f velocity;
+    sf::Clock clock;
+    sf::Time time;
     const float gravity = 9.81f;
     const float downVelocity = 600.0f;
     const float jumpVelocity = -600.0f;
