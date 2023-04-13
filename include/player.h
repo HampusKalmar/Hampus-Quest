@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../include/input.h"
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include "../include/input.h"
@@ -21,8 +22,11 @@ class Player
     bool isJumping = false;
 
   public:
-    void printPlayerSprite();
+    Player();
+    void movePlayerRight();
+    void movePlayerLeft();
     void jumpPlayer(float deltaTime);
+    void updatePlayerMovement();
     sf::Sprite getSprite() const;
 };
 

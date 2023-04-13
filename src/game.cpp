@@ -1,18 +1,22 @@
 #include "../include/game.h"
 #include "../include/sound.h"
 #include "../include/player.h"
+#include "../include/input.h"
 
+/**
+ * The gameWindow method initializes and manages the game window, handles user input events,
+ * and displays the player sprite in the game window.
+*/
 void Game::gameWindow()
 {
   Sound* sound = new Sound();
   sound->menuMusic();
 
   Player player;
-  player.printPlayerSprite();
 
   sf::RenderWindow gameWindow(sf::VideoMode(1400, 900), "Hampus Quest");
 
-  window.setFramerateLimit(30);
+  window.setFramerateLimit(20);
 
   sf::Clock clock;
   while (gameWindow.isOpen())
