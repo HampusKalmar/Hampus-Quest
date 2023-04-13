@@ -1,5 +1,6 @@
 #include "../include/player.h"
 
+// prints the sprite.
 void Player::printPlayerSprite()
 {
   texture.loadFromFile("assets/images/hampus.png");
