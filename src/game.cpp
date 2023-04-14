@@ -3,6 +3,7 @@
 #include "../include/player.h"
 #include "../include/input.h"
 #include "../include/environment.h"
+#include "../include/background.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,
@@ -14,6 +15,8 @@ void Game::gameWindow()
   sound->menuMusic();
 
   Player player;
+
+  Background background(window);
 
   // Environment environment;
 
@@ -45,6 +48,7 @@ void Game::gameWindow()
 
     gameWindow.clear(sf::Color(0, 0, 70));
     player.updatePlayerMovement();
+    background.draw();
     gameWindow.draw(player.getSprite());
     gameWindow.display();
   }

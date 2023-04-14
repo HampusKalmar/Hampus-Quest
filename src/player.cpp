@@ -72,9 +72,9 @@ void Player::movePlayerLeft()
 
 void Player::updatePlayerMovement()
 {
+  time = clock.restart();
   this->movePlayerRight();
   this->movePlayerLeft();
-  time = clock.restart();
   this->jumpPlayer(time.asSeconds());
 }
 
