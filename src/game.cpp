@@ -2,6 +2,7 @@
 #include "../include/sound.h"
 #include "../include/player.h"
 #include "../include/input.h"
+#include "../include/environment.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,
@@ -14,9 +15,12 @@ void Game::gameWindow()
 
   Player player;
 
+  // Environment environment;
+
   sf::RenderWindow gameWindow(sf::VideoMode(1400, 900), "Hampus Quest");
 
-  window.setFramerateLimit(20);
+  gameWindow.setFramerateLimit(45);
+  // environment.drawGround(gameWindow.getSize().x);
 
   while (gameWindow.isOpen())
   {
@@ -27,6 +31,18 @@ void Game::gameWindow()
         gameWindow.close();
       }
     }
+
+    //for (const auto& sprite : environment.getTopGround())
+    //{
+     // gameWindow.draw(sprite);
+   // }
+
+    // Sets the camera to the player.
+    //sf::Vector2u windowSize = gameWindow.getSize();
+    //float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
+    //float viewY = player.getSprite().getPosition().y - windowSize.y / 2.0f;
+    //sf::View view(sf::FloatRect(viewX, viewY, windowSize.x, windowSize.y));
+
     gameWindow.clear(sf::Color(0, 0, 70));
     player.updatePlayerMovement();
     gameWindow.draw(player.getSprite());

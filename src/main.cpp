@@ -1,5 +1,4 @@
 #include "../include/game.h"
-#include "../include/sound.h"
 
 int main ()
 {
