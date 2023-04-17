@@ -7,7 +7,7 @@ Enemy::Enemy()
   textureThree.loadFromFile("assets/images/enemySpriteThree.png");
 
   sprite.setTexture(textureOne);
-  sprite.setPosition(200, 730);
+  sprite.setPosition(200, 750);
 }
 
 void Enemy::leftEnemyMovement()
@@ -15,7 +15,6 @@ void Enemy::leftEnemyMovement()
   if (sprite.getPosition().x > 100)
   {
     sprite.move(sf::Vector2f(- 1.f, 0.f));
-    std::cout << "Enemy moved left" << std::endl;
   }
 }
 
@@ -24,7 +23,6 @@ void Enemy::rightEnemyMovement()
   if (sprite.getPosition().x < 400)
   {
     sprite.move(sf::Vector2f(1.f, 0.f));
-    std::cout << "Enemy moved right" << std::endl;
   }
 }
 
@@ -41,10 +39,13 @@ void Enemy::updateEnemyMovement()
 
   if (isMovingRight)
   {
+    sprite.setScale(- 1.f, 1.f);
+    //sprite.setOrigin(sprite.getLocalBounds().width / 1.f, sprite.getLocalBounds().height / 1.f);
     rightEnemyMovement();
   }
   else
   {
+    sprite.setScale(1.f, 1.f);
     leftEnemyMovement();
   }
 }

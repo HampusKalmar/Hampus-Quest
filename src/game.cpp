@@ -4,6 +4,7 @@
 #include "../include/input.h"
 #include "../include/environment.h"
 #include "../include/background.h"
+#include "../include/enemy.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,

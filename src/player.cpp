@@ -78,6 +78,7 @@ void Player::updatePlayerMovement()
   this->jumpPlayer(time.asSeconds());
 }
 
+
 sf::Sprite Player::getSprite() const
 {
   return sprite;

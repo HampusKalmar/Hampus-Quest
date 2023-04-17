@@ -1,11 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../include/input.h"
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include "../include/input.h"
-
 class Player
 {
   private:
