@@ -23,7 +23,7 @@ void Game::gameWindow()
 
   // Environment environment;
 
-  sf::RenderWindow gameWindow(sf::VideoMode(1400, 900), "Hampus Quest");
+  sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest");
 
   gameWindow.setFramerateLimit(45);
   // environment.drawGround(gameWindow.getSize().x);
@@ -52,6 +52,7 @@ void Game::gameWindow()
     gameWindow.clear(sf::Color(0, 0, 70));
     gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(player.getSprite());
+    player.playerAnimation();
     player.updatePlayerMovement();
     enemy.enemyAnimation();
     enemy.updateEnemyMovement();

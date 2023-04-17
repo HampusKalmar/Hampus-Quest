@@ -7,7 +7,8 @@
 class Player
 {
   private:
-    sf::Texture texture;
+    sf::Texture textureOne;
+    sf::Texture textureTwo;
     sf::Sprite sprite;
     Input input;
     sf::Vector2f velocity;
@@ -20,6 +21,11 @@ class Player
     const float maxAirTime = 2.2f;
     float airTime;
     bool isJumping = false;
+    float deltaTime;
+    float timer;
+    int animationStep;
+    bool isMovingRight = false;
+    bool isMovingLeft = false;
 
   public:
     Player();
@@ -27,6 +33,7 @@ class Player
     void movePlayerLeft();
     void jumpPlayer(float deltaTime);
     void updatePlayerMovement();
+    void playerAnimation();
     sf::Sprite getSprite() const;
 };
 

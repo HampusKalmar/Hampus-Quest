@@ -2,9 +2,13 @@
 
 Player::Player()
 {
-  texture.loadFromFile("assets/images/hampus.png");
-  sprite.setTexture(texture);
+  textureOne.loadFromFile("assets/images/spriteOne.png");
+  textureTwo.loadFromFile("assets/images/spriteTwo.png");
+  sprite.setTexture(textureOne);
   sprite.setPosition(0, 730);
+
+  timer = 0.0f;
+  animationStep = 0;
 }
 
 // Make the player jump.
@@ -76,6 +80,41 @@ void Player::updatePlayerMovement()
   this->movePlayerRight();
   this->movePlayerLeft();
   this->jumpPlayer(time.asSeconds());
+}
+
+void Player::playerAnimation()
+{
+  deltaTime = clock.restart().asSeconds();
+  timer += deltaTime;
+  if (timer >= 0.22f)
+  {
+    timer -= 0.22f;
+    if (!isMovingRight || isMovingLeft)
+    {
+      animationStep = (animationStep + 1) % 2;
+      if (animationStep == 0)
+      {
+        sprite.setTexture(textureOne);
+      }
+      else if (animationStep == 1)
+      {
+        sprite.setTexture(textureTwo);
+      }
+    }
+    else
+    {
+      animationStep = 0;
+      sprite.setTexture(textureOne);
+    }
+  }
+  if (isMovingLeft)
+  {
+    sprite.setScale(- 1.f, 1.f);
+  }
+  else
+  {
+    sprite.setScale(1.f, 1.f);
+  }
 }
 
 
