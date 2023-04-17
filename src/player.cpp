@@ -71,6 +71,7 @@ void Player::movePlayerLeft()
   if (input.isLeftKeyPressed())
   {
     sprite.move(sf::Vector2f(-5.20f, 0.f));
+    // check deltaTime here and in movePlayerRight()!!!!!!!!
   }
 }
 
