@@ -8,13 +8,16 @@ Enemy::Enemy()
 
   sprite.setTexture(textureOne);
   sprite.setPosition(200, 750);
+
+  timer = 0.0f;
+  animationStep = 0;
 }
 
 void Enemy::leftEnemyMovement()
 {
   if (sprite.getPosition().x > 100)
   {
-    sprite.move(sf::Vector2f(- 1.f, 0.f));
+    sprite.move(sf::Vector2f(- 1.17f, 0.f));
   }
 }
 
@@ -22,7 +25,7 @@ void Enemy::rightEnemyMovement()
 {
   if (sprite.getPosition().x < 400)
   {
-    sprite.move(sf::Vector2f(1.f, 0.f));
+    sprite.move(sf::Vector2f(1.17f, 0.f));
   }
 }
 
@@ -47,6 +50,29 @@ void Enemy::updateEnemyMovement()
   {
     sprite.setScale(1.f, 1.f);
     leftEnemyMovement();
+  }
+}
+
+void Enemy::enemyAnimation()
+{
+  deltaTime = clock.restart().asSeconds();
+  timer += deltaTime;
+  if (timer >= 0.22f)
+  {
+    timer -= 0.22f;
+    animationStep = (animationStep + 1) % 3;
+    if (animationStep == 0)
+    {
+      sprite.setTexture(textureOne);
+    }
+    else if (animationStep == 1)
+    {
+      sprite.setTexture(textureTwo);
+    }
+    else if (animationStep == 2)
+    {
+      sprite.setTexture(textureThree);
+    }
   }
 }
 

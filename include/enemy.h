@@ -11,13 +11,18 @@ class Enemy
     sf::Texture textureTwo;
     sf::Texture textureThree;
     sf::Sprite sprite;
+    sf::Clock clock;
     bool isMovingRight = false;
+    float timer;
+    float deltaTime;
+    int animationStep;
 
   public:
     Enemy();
     void leftEnemyMovement();
     void rightEnemyMovement();
     void updateEnemyMovement();
+    void enemyAnimation();
     sf::Sprite getEnemySprite() const;
 };
 

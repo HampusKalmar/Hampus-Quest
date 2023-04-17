@@ -53,6 +53,7 @@ void Game::gameWindow()
     gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(player.getSprite());
     player.updatePlayerMovement();
+    enemy.enemyAnimation();
     enemy.updateEnemyMovement();
     background.draw();
     gameWindow.display();
