@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "SFML/Graphics.hpp"
+#include "../include/enemy.h"
 #include <iostream>
 
 class Game

@@ -58,7 +58,7 @@ void Player::movePlayerRight()
 {
   if (input.isRightKeyPressed())
   {
-    sprite.move(sf::Vector2f(2.50, 0));
+    sprite.move(sf::Vector2f(5.20f, 0.f));
   }
 }
 
@@ -66,7 +66,7 @@ void Player::movePlayerLeft()
 {
   if (input.isLeftKeyPressed())
   {
-    sprite.move(sf::Vector2f(-2.50, 0));
+    sprite.move(sf::Vector2f(-5.20f, 0.f));
   }
 }
 

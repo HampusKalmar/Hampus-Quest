@@ -16,6 +16,8 @@ void Game::gameWindow()
 
   Player player;
 
+  Enemy enemy;
+
   Background background(window);
 
   // Environment environment;
@@ -47,9 +49,11 @@ void Game::gameWindow()
     //sf::View view(sf::FloatRect(viewX, viewY, windowSize.x, windowSize.y));
 
     gameWindow.clear(sf::Color(0, 0, 70));
-    player.updatePlayerMovement();
-    background.draw();
+    gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(player.getSprite());
+    player.updatePlayerMovement();
+    enemy.updateEnemyMovement();
+    background.draw();
     gameWindow.display();
   }
   delete sound;
