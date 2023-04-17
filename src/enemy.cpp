@@ -2,9 +2,9 @@
 
 Enemy::Enemy()
 {
-  textureOne.loadFromFile("assets/images/enemySpriteOne.png");
-  textureTwo.loadFromFile("assets/images/enemySpriteTwo.png");
-  textureThree.loadFromFile("assets/images/enemySpriteThree.png");
+  textureOne.loadFromFile("assets/images/enemyFirst.png");
+  textureTwo.loadFromFile("assets/images/enemySecond.png");
+  textureThree.loadFromFile("assets/images/enemyFinal.png");
 
   sprite.setTexture(textureOne);
   sprite.setPosition(200, 750);
