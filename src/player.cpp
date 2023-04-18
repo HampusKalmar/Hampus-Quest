@@ -1,5 +1,8 @@
 #include "../include/player.h"
 
+/**
+ * Player class contructor.
+ */
 Player::Player()
 {
   textureOne.loadFromFile("assets/images/newSpriteOne.png");
@@ -11,7 +14,9 @@ Player::Player()
   animationStep = 0;
 }
 
-// Make the player jump.
+/**
+ * Method to make the player be able to jump.
+ */
 void Player::jumpPlayer(float deltaTime)
 {
   float gravityDelta = gravity * deltaTime;
@@ -58,6 +63,9 @@ void Player::jumpPlayer(float deltaTime)
   }
 }
 
+/**
+ * Makes the player move right.
+ */
 void Player::movePlayerRight()
 {
   if (input.isRightKeyPressed())
@@ -67,6 +75,9 @@ void Player::movePlayerRight()
   }
 }
 
+/**
+ * Makes the player move left.
+ */
 void Player::movePlayerLeft()
 {
   if (input.isLeftKeyPressed())
@@ -77,6 +88,9 @@ void Player::movePlayerLeft()
   }
 }
 
+/**
+ * Method to be called inside the main game loop.
+ */
 void Player::updatePlayerMovement()
 {
   this->movePlayerRight();
@@ -84,6 +98,9 @@ void Player::updatePlayerMovement()
   this->jumpPlayer(deltaTime);
 }
 
+/**
+ * Creates the animation for the player.
+ */
 void Player::playerAnimation()
 {
   deltaTime = clock.restart().asSeconds();
@@ -126,7 +143,9 @@ void Player::playerAnimation()
   }
 }
 
-
+/**
+ * Returns a copy of the sprite associated with the player object.
+ */
 sf::Sprite Player::getSprite() const
 {
   return sprite;
