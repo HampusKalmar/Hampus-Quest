@@ -7,7 +7,8 @@ Enemy::Enemy()
   textureThree.loadFromFile("assets/images/enemyFinal.png");
 
   sprite.setTexture(textureOne);
-  sprite.setPosition(200, 724);
+  sprite.setScale(2.0f, 2.0f);
+  sprite.setPosition(200, 700);
 
   timer = 0.0f;
   animationStep = 0;
@@ -42,13 +43,13 @@ void Enemy::updateEnemyMovement()
 
   if (isMovingRight)
   {
-    sprite.setScale(- 1.f, 1.f);
+    sprite.setScale(- 2.0f, 2.0f);
     //sprite.setOrigin(sprite.getLocalBounds().width / 1.f, sprite.getLocalBounds().height / 1.f);
     rightEnemyMovement();
   }
   else
   {
-    sprite.setScale(1.f, 1.f);
+    sprite.setScale(2.0f, 2.0f);
     leftEnemyMovement();
   }
 }

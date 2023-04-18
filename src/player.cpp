@@ -8,7 +8,8 @@ Player::Player()
   textureOne.loadFromFile("assets/images/newSpriteOne.png");
   textureTwo.loadFromFile("assets/images/newSpriteTwo.png");
   sprite.setTexture(textureOne);
-  sprite.setPosition(0, 800);
+  sprite.setScale(2.0f, 2.0f);
+  sprite.setPosition(0, 708);
 
   timer = 0.0f;
   animationStep = 0;
@@ -71,7 +72,7 @@ void Player::movePlayerRight()
   if (input.isRightKeyPressed())
   {
     sprite.move(sf::Vector2f(5.20f, 0.f));
-    sprite.setScale(1.f, 1.f);
+    sprite.setScale(2.0f, 2.0f);
   }
 }
 
@@ -83,7 +84,7 @@ void Player::movePlayerLeft()
   if (input.isLeftKeyPressed())
   {
     sprite.move(sf::Vector2f(-5.20f, 0.f));
-    sprite.setScale(- 1.f, 1.f);
+    sprite.setScale(- 2.0f, 2.0f);
     // check deltaTime here and in movePlayerRight()!!!!!!!!
   }
 }
