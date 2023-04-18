@@ -5,6 +5,7 @@
 #include "../include/environment.h"
 #include "../include/background.h"
 #include "../include/enemy.h"
+#include "../include/collision.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,
@@ -18,6 +19,7 @@ void Game::gameWindow()
   Player player;
   Enemy enemy;
   Environment environment;
+  Collision collision;
   //Background Background(window);
  
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
@@ -34,6 +36,12 @@ void Game::gameWindow()
       {
         gameWindow.close();
       }
+    }
+
+    if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
+    {
+      sf::sleep(sf::seconds(5));
+      gameWindow.close();
     }
 
     // Sets the camera to the player.
