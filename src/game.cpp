@@ -21,6 +21,9 @@ void Game::gameWindow()
   Background background(window);
 
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
+  sf::View view(sf::FloatRect(0, 0, gameWindow.getSize().x, gameWindow.getSize().y));
+  view.zoom(0.85f);
+  gameWindow.setView(view);
   gameWindow.setFramerateLimit(30);
 
   while (gameWindow.isOpen())

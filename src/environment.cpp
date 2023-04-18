@@ -11,7 +11,7 @@ Environment::Environment()
   for (int i = 0; i < 15; i++)
   {
     m_groundSprites[i].setTexture(texture);
-    m_groundSprites[i].setPosition(i * texture.getSize().x, 795.f);
+    m_groundSprites[i].setPosition(i * texture.getSize().x, 752.f);
   }
 
   // Creates the holes
