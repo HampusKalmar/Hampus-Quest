@@ -2,8 +2,8 @@
 
 Player::Player()
 {
-  textureOne.loadFromFile("assets/images/spriteOne.png");
-  textureTwo.loadFromFile("assets/images/spriteTwo.png");
+  textureOne.loadFromFile("assets/images/newSpriteOne.png");
+  textureTwo.loadFromFile("assets/images/newSpriteTwo.png");
   sprite.setTexture(textureOne);
   sprite.setPosition(0, 730);
 
@@ -87,9 +87,9 @@ void Player::playerAnimation()
 {
   deltaTime = clock.restart().asSeconds();
   timer += deltaTime;
-  if (timer >= 0.22f)
+  if (timer >= 0.30f)
   {
-    timer -= 0.22f;
+    timer -= 0.30f;
     if (!isMovingRight || isMovingLeft)
     {
       animationStep = (animationStep + 1) % 2;
