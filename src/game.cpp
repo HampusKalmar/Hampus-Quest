@@ -38,9 +38,10 @@ void Game::gameWindow()
       }
     }
 
+    // Checks if the player has collided with the enemy.
     if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
     {
-      sf::sleep(sf::seconds(5));
+      sf::sleep(sf::seconds(3));
       gameWindow.close();
     }
 

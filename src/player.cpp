@@ -63,6 +63,7 @@ void Player::movePlayerRight()
   if (input.isRightKeyPressed())
   {
     sprite.move(sf::Vector2f(5.20f, 0.f));
+    sprite.setScale(1.f, 1.f);
   }
 }
 
@@ -71,27 +72,30 @@ void Player::movePlayerLeft()
   if (input.isLeftKeyPressed())
   {
     sprite.move(sf::Vector2f(-5.20f, 0.f));
+    sprite.setScale(- 1.f, 1.f);
     // check deltaTime here and in movePlayerRight()!!!!!!!!
   }
 }
 
 void Player::updatePlayerMovement()
 {
-  time = clock.restart();
   this->movePlayerRight();
   this->movePlayerLeft();
-  this->jumpPlayer(time.asSeconds());
+  this->jumpPlayer(deltaTime);
 }
 
 void Player::playerAnimation()
 {
   deltaTime = clock.restart().asSeconds();
-  timer += deltaTime;
-  if (timer >= 0.30f)
+  isMovingRight = input.isRightKeyPressed();
+  isMovingLeft = input.isLeftKeyPressed();
+
+  if (isMovingRight)
   {
-    timer -= 0.30f;
-    if (!isMovingRight || isMovingLeft)
+    timer += deltaTime;
+    if (timer >= 0.23f)
     {
+      timer -= 0.23f;
       animationStep = (animationStep + 1) % 2;
       if (animationStep == 0)
       {
@@ -102,19 +106,23 @@ void Player::playerAnimation()
         sprite.setTexture(textureTwo);
       }
     }
-    else
+  }
+  else if (isMovingLeft)
+  {
+    timer += deltaTime;
+    if (timer >= 0.23f)
     {
-      animationStep = 0;
-      sprite.setTexture(textureOne);
+      timer -= 0.23f;
+      animationStep = (animationStep + 1) % 2;
+      if (animationStep == 0)
+      {
+        sprite.setTexture(textureOne);
+      }
+      else if (animationStep == 1)
+      {
+        sprite.setTexture(textureTwo);
+      }
     }
-  }
-  if (isMovingLeft)
-  {
-    sprite.setScale(- 1.f, 1.f);
-  }
-  else
-  {
-    sprite.setScale(1.f, 1.f);
   }
 }
 
