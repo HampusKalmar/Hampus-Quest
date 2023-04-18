@@ -6,23 +6,32 @@ Environment::Environment()
   {
     std::cout << "Failed to load image" << std::endl;
   }
-  topGround.setTexture(texture);
-  topGround.setPosition(0, 763);
-}
-
-void Environment::drawGround(float windowWidth)
-{
-  int numCopies = std::ceil(windowWidth / topGround.getGlobalBounds().width);
   
-  for (int i = 0; i < numCopies; i++)
+  // Creates the blocks.
+  for (int i = 0; i < 15; i++)
   {
-    sf::Sprite topCopy = topGround;
-    topCopy.setPosition(i * topGround.getGlobalBounds().width, 763);
-    topGroundSprites.push_back(topCopy);
+    m_groundSprites[i].setTexture(texture);
+    m_groundSprites[i].setPosition(i * texture.getSize().x, 795.f);
+  }
+
+  // Creates the holes
+  for (int i = 0; i < 3; i++)
+  {
+    m_holes[i].setSize(sf::Vector2f(50.f, 100.f));
+    m_holes[i].setFillColor(sf::Color(0, 0, 70));
+    m_holes[i].setPosition((i * texture.getSize().x) + (texture.getSize().x / 2.f) - (m_holes[i].getSize().x / 2.f), 450.f);
   }
 }
 
-std::vector<sf::Sprite> Environment::getTopGround() const
+void Environment::drawGround(sf::RenderWindow& window)
 {
-  return topGroundSprites;
-} 
+  for (int i = 0; i < 15; i++)
+  {
+    window.draw(m_groundSprites[i]);
+  }
+
+  for (int i = 0; i < 3; i++)
+  {
+    window.draw(m_holes[i]);
+  }
+}

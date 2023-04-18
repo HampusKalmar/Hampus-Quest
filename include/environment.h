@@ -1,5 +1,4 @@
 #ifndef ENVIRONMENT_H
-#define ENVIRONMENT_H
 
 #include <iostream>
 #include "SFML/Graphics.hpp"
@@ -9,15 +8,13 @@ class Environment
 {
   private:
     sf::Texture texture;
-    sf::Sprite topGround;
-    sf::Sprite bottomGround;
-    std::vector<sf::Sprite> topGroundSprites;
-    std::vector<sf::Sprite> bottomGroundSprite;
+    sf::Sprite m_groundSprites[15];
+    sf::RectangleShape m_holes[3];
 
   public:
     Environment();
-    void drawGround(float windowWidth);
-    std::vector<sf::Sprite> getTopGround() const;
+    void drawGround(sf::RenderWindow& window);
+    void update(float deltaTime);
 };
 
 #endif

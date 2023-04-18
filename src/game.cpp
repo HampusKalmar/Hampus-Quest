@@ -16,15 +16,12 @@ void Game::gameWindow()
   sound->menuMusic();
 
   Player player;
-
   Enemy enemy;
-
+  Environment environment;
   Background background(window);
 
-  // Environment environment;
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
   gameWindow.setFramerateLimit(30);
-  // environment.drawGround(gameWindow.getSize().x);
 
   while (gameWindow.isOpen())
   {
@@ -36,11 +33,6 @@ void Game::gameWindow()
       }
     }
 
-    //for (const auto& sprite : environment.getTopGround())
-    //{
-     // gameWindow.draw(sprite);
-   // }
-
     // Sets the camera to the player.
     //sf::Vector2u windowSize = gameWindow.getSize();
     //float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
@@ -50,11 +42,12 @@ void Game::gameWindow()
     gameWindow.clear(sf::Color(0, 0, 70));
     gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(player.getSprite());
+    environment.drawGround(gameWindow);
     player.playerAnimation();
     player.updatePlayerMovement();
     enemy.enemyAnimation();
     enemy.updateEnemyMovement();
-    background.draw();
+    //background.draw();
     gameWindow.display();
   }
   delete sound;

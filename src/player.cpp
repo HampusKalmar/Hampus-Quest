@@ -5,7 +5,7 @@ Player::Player()
   textureOne.loadFromFile("assets/images/newSpriteOne.png");
   textureTwo.loadFromFile("assets/images/newSpriteTwo.png");
   sprite.setTexture(textureOne);
-  sprite.setPosition(0, 730);
+  sprite.setPosition(0, 800);
 
   timer = 0.0f;
   animationStep = 0;

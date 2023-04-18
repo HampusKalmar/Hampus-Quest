@@ -7,7 +7,7 @@ Enemy::Enemy()
   textureThree.loadFromFile("assets/images/enemyFinal.png");
 
   sprite.setTexture(textureOne);
-  sprite.setPosition(200, 750);
+  sprite.setPosition(200, 770);
 
   timer = 0.0f;
   animationStep = 0;
