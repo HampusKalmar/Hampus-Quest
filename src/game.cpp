@@ -18,11 +18,11 @@ void Game::gameWindow()
   Player player;
   Enemy enemy;
   Environment environment;
-  Background background(window);
-
+  //Background Background(window);
+ 
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
   sf::View view(sf::FloatRect(0, 0, gameWindow.getSize().x, gameWindow.getSize().y));
-  view.zoom(0.85f);
+  view.zoom(0.09f);
   gameWindow.setView(view);
   gameWindow.setFramerateLimit(30);
 
@@ -37,11 +37,11 @@ void Game::gameWindow()
     }
 
     // Sets the camera to the player.
-    //sf::Vector2u windowSize = gameWindow.getSize();
-    //float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
-    //float viewY = player.getSprite().getPosition().y - windowSize.y / 2.0f;
-    //sf::View view(sf::FloatRect(viewX, viewY, windowSize.x, windowSize.y));
-
+    sf::Vector2u windowSize = gameWindow.getSize();
+    float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
+    float viewY = player.getSprite().getPosition().y - windowSize.y / 2.0f;
+    sf::View view(sf::FloatRect(viewX, viewY, windowSize.x, windowSize.y));
+    gameWindow.setView(view);
     gameWindow.clear(sf::Color(0, 0, 70));
     gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(player.getSprite());
