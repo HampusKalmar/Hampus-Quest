@@ -1,18 +1,17 @@
 #include "../include/background.h"
 
-Background::Background(sf::RenderWindow& window)
-  : window(window)
+Background::Background(const std::string& filename, int windowWidth,int windowHeight)
 {
-  if (!texture.loadFromFile("assets/images/background.png"))
+  if (!texture.loadFromFile("assets/images/theBackground.png"))
   {
     std::cout << "Failed to load background" << std::endl;
   }
 
   sprite.setTexture(texture);
-  sprite.setScale(float(window.getSize().x / sprite.getLocalBounds().width), float(window.getSize().y / sprite.getLocalBounds().height));
+   sprite.setScale((float)windowWidth / texture.getSize().x, (float)windowHeight / texture.getSize().y);
 }
 
-void Background::draw()
+void Background::drawBackground(sf::RenderWindow& window)
 {
   window.draw(sprite);
 }

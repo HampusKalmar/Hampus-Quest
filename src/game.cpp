@@ -22,9 +22,9 @@ void Game::gameWindow()
   Environment environment;
   Collision collision;
   SecondEnemy secondEnemy;
-  //Background Background(window);
  
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
+  Background background("assets/images/theBackground.png", gameWindow.getSize().x, gameWindow.getSize().y);
 
   gameWindow.setFramerateLimit(30);
 
@@ -63,7 +63,9 @@ void Game::gameWindow()
     float viewY = player.getSprite().getPosition().y - windowSize.y / 2.0f;
     sf::View view(sf::FloatRect(viewX, viewY, windowSize.x, windowSize.y));
     gameWindow.setView(view);
-    gameWindow.clear(sf::Color(0, 0, 70));
+    //gameWindow.clear(sf::Color(0, 0, 70));
+    gameWindow.clear();
+    background.drawBackground(gameWindow);
     gameWindow.draw(enemy.getEnemySprite());
     gameWindow.draw(secondEnemy.getSecondEnemySprite());
     gameWindow.draw(player.getSprite());
