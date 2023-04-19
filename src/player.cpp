@@ -28,7 +28,7 @@ void Player::jumpPlayer(float deltaTime)
     {
       isJumping = true;
       velocity.y = jumpVelocity;
-       airTime = 0.0f;
+      airTime = 0.0f;
     }
     else if (isJumping && velocity.y < 0.0f && airTime < maxAirTime)
     {
@@ -40,27 +40,21 @@ void Player::jumpPlayer(float deltaTime)
   {
     velocity.y += gravityDelta;
     airTime += deltaTime;
+    sprite.move(velocity * deltaTime);
     
-    if (airTime > maxAirTime || (velocity.y > 0 && sprite.getPosition().y >= 730.0f))
+    if (sprite.getPosition().y <= maxJumpHeight)
     {
-      isJumping = false;
-      velocity.y = downVelocity;
+      //isJumping = false;
+      velocity.y += downVelocity;
     }
   }
   sprite.move(velocity * deltaTime);
 
-  if (sprite.getPosition().y >= 730.0f)
+  if (sprite.getPosition().y >= 708.0f)
   {
-    sprite.setPosition(sprite.getPosition().x, 730.0f);
+    sprite.setPosition(sprite.getPosition().x, 708.0f);
     isJumping = false;
     velocity.y = 0.0f;
-  }
-
-  if (isJumping && sprite.getPosition().y <= 730.0f - maxJumpHeight)
-  {
-    isJumping = false;
-    velocity.y = downVelocity;
-    airTime = downVelocity;
   }
 }
 
