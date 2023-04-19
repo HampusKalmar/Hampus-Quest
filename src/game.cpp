@@ -43,6 +43,11 @@ void Game::gameWindow()
       gameWindow.close();
     }
 
+    if (collision.checkSpriteCollision(player.getSprite(), environment.getSpriteBlocks()))
+    {
+      std::cout << "collision detected" << std::endl;
+    }
+
     // Sets the camera to the player.
     sf::Vector2u windowSize = gameWindow.getSize();
     float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
