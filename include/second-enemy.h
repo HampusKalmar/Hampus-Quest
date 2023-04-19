@@ -22,7 +22,7 @@ class SecondEnemy
     void upEnemyMovement();
     void downEnemyMovement();
     void updateSecondEnemyMovement();
-    void enemyAnimation();
+    void secondEnemyAnimation();
     sf::Sprite getSecondEnemySprite() const;
 };
 

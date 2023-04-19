@@ -45,6 +45,13 @@ void Game::gameWindow()
       gameWindow.close();
     }
 
+     // Checks if the player has collided with the second enemy.
+    if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
+    {
+      sf::sleep(sf::seconds(3));
+      gameWindow.close();
+    }
+
     if (collision.checkSpriteCollision(player.getSprite(), environment.getSpriteBlocks()))
     {
       std::cout << "collision detected" << std::endl;
@@ -66,6 +73,7 @@ void Game::gameWindow()
     enemy.enemyAnimation();
     enemy.updateEnemyMovement();
     secondEnemy.updateSecondEnemyMovement();
+    secondEnemy.secondEnemyAnimation();
     //background.draw();
     gameWindow.display();
   }

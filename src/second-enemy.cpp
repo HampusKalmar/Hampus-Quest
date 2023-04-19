@@ -50,6 +50,25 @@ void SecondEnemy::updateSecondEnemyMovement()
   }
 }
 
+void SecondEnemy::secondEnemyAnimation()
+{
+  deltaTime = clock.restart().asSeconds();
+  timer += deltaTime;
+  if (timer >= 0.22f)
+  {
+    timer -= 0.22f;
+    animationStep = (animationStep + 1) % 2;
+    if (animationStep == 0)
+    {
+      sprite.setTexture(textureOne);
+    }
+    else if (animationStep == 1)
+    {
+      sprite.setTexture(textureTwo);
+    }
+  }
+}
+
 sf::Sprite SecondEnemy::getSecondEnemySprite() const
 {
   return sprite;
