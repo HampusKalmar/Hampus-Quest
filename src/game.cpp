@@ -6,6 +6,7 @@
 #include "../include/background.h"
 #include "../include/enemy.h"
 #include "../include/collision.h"
+#include "../include/second-enemy.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,
@@ -20,6 +21,7 @@ void Game::gameWindow()
   Enemy enemy;
   Environment environment;
   Collision collision;
+  SecondEnemy secondEnemy;
   //Background Background(window);
  
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
@@ -56,12 +58,14 @@ void Game::gameWindow()
     gameWindow.setView(view);
     gameWindow.clear(sf::Color(0, 0, 70));
     gameWindow.draw(enemy.getEnemySprite());
+    gameWindow.draw(secondEnemy.getSecondEnemySprite());
     gameWindow.draw(player.getSprite());
     environment.drawGround(gameWindow);
     player.playerAnimation();
     player.updatePlayerMovement();
     enemy.enemyAnimation();
     enemy.updateEnemyMovement();
+    secondEnemy.updateSecondEnemyMovement();
     //background.draw();
     gameWindow.display();
   }
