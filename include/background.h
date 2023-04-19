@@ -10,8 +10,7 @@ class Background
     sf::Sprite sprite;
 
   public:
-    Background(const std::string& filename, int windowWidth, int windowHeight);
-    void drawBackground(sf::RenderWindow& window);
+    void backgroundColor(sf::RenderTarget& target, const sf::Color& topColor, const sf::Color& bottomColor);
 };
 
 #endif

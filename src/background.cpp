@@ -1,17 +1,15 @@
 #include "../include/background.h"
 
-Background::Background(const std::string& filename, int windowWidth,int windowHeight)
+void Background::backgroundColor(sf::RenderTarget& target, const sf::Color& topColor, const sf::Color& bottomColor)
 {
-  if (!texture.loadFromFile("assets/images/theBackground.png"))
-  {
-    std::cout << "Failed to load background" << std::endl;
-  }
+    sf::RectangleShape topHalf(sf::Vector2f(target.getSize().x, target.getSize().y / 2));
+    topHalf.setPosition(0, 0);
+    topHalf.setFillColor(topColor);
 
-  sprite.setTexture(texture);
-   sprite.setScale((float)windowWidth / texture.getSize().x, (float)windowHeight / texture.getSize().y);
-}
+    sf::RectangleShape bottomHalf(sf::Vector2f(target.getSize().x, target.getSize().y / 2));
+    bottomHalf.setPosition(0, target.getSize().y / 2);
+    bottomHalf.setFillColor(bottomColor);
 
-void Background::drawBackground(sf::RenderWindow& window)
-{
-  window.draw(sprite);
+    target.draw(topHalf);
+    target.draw(bottomHalf);
 }
