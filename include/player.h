@@ -16,8 +16,8 @@ class Player
     sf::Time time;
     const float gravity = 9.81f;
     const float downVelocity = 600.0f;
-    const float jumpVelocity = -600.0f;
-    const float maxJumpHeight = 150.0f;
+    const float jumpVelocity = -400.0f;
+    const float maxJumpHeight = 50.0f;
     const float maxAirTime = 2.2f;
     float airTime;
     bool isJumping = false;
