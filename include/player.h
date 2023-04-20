@@ -18,7 +18,7 @@ class Player
     const float downVelocity = 600.0f;
     const float jumpVelocity = -400.0f;
     const float maxJumpHeight = 50.0f;
-    const float maxAirTime = 2.2f;
+    const float maxAirTime = 1.5f;
     float airTime;
     bool isJumping = false;
     float deltaTime;
