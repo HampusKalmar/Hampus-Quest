@@ -24,11 +24,14 @@ void Environment::drawGround(sf::RenderWindow& window)
   }
 }
 
-sf::Sprite Environment::getSpriteBlocks() const
+std::vector<sf::Sprite> Environment::getSpriteBlocks() const
 {
-  for (int i = 0; i < 15; i++)
+  std::vector<sf::Sprite> sprites;
+  
+  for (const auto& sprite : m_groundSprites)
   {
-    i++;
+    sprites.push_back(sprite);
   }
-  return m_groundSprites[15];
+  
+  return sprites;
 }

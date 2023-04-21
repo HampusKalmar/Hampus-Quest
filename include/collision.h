@@ -9,7 +9,8 @@ class Collision
     sf::Sprite sprite2;
 
   public:
-    bool checkSpriteCollision(sf::Sprite sprite1, sf::Sprite sprite2);
+    bool checkSpriteCollision(sf::Sprite sprite1, sf::Sprite sprite2);  
+    bool checkSpriteCollisionWithGround(sf::Sprite playerSprite, std::vector<sf::Sprite> groundSprites);  
 };
 
 #endif

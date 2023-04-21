@@ -7,3 +7,18 @@ bool Collision::checkSpriteCollision(sf::Sprite sprite1, sf::Sprite sprite2)
 
   return rect1.intersects(rect2);
 }
+
+bool Collision::checkSpriteCollisionWithGround(sf::Sprite playerSprite, std::vector<sf::Sprite> groundSprites)
+{
+  sf::FloatRect rect1 = playerSprite.getGlobalBounds();
+  for (const auto& groundSprite : groundSprites)
+  {
+    sf::FloatRect rect2 = groundSprite.getGlobalBounds();
+
+    if (rect1.intersects(rect2))
+    {
+      return true;
+    }
+  }
+  return false;
+}

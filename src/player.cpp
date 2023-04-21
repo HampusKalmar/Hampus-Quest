@@ -38,7 +38,7 @@ void Player::jumpPlayer(float deltaTime)
   
   if (isJumping)
   {
-    float descendingGravityDelta = gravityDelta * 0.3f;
+    float descendingGravityDelta = gravity * 0.3f;
     velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravityDelta;
     airTime += deltaTime;
     sprite.move(velocity * deltaTime);

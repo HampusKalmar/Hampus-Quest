@@ -13,7 +13,7 @@ class Environment
   public:
     Environment();
     void drawGround(sf::RenderWindow& window);
-    sf::Sprite getSpriteBlocks() const;
+    std::vector<sf::Sprite> getSpriteBlocks() const;
 
 };
 

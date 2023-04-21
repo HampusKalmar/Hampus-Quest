@@ -45,16 +45,17 @@ void Game::gameWindow()
       gameWindow.close();
     }
 
-     // Checks if the player has collided with the second enemy.
+    // Checks if the player has collided with the second enemy.
     if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
     {
       sf::sleep(sf::seconds(3));
       gameWindow.close();
     }
 
-    if (collision.checkSpriteCollision(player.getSprite(), environment.getSpriteBlocks()))
+    // Checks if the player is touching the ground.
+    if (collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks()))
     {
-      std::cout << "collision detected" << std::endl;
+      std::cout << "The player is touching the grounf" << std::endl;
     }
 
     // Sets the camera to the player.
