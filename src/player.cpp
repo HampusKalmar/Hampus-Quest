@@ -9,10 +9,11 @@ Player::Player()
   textureTwo.loadFromFile("assets/images/newSpriteTwo.png");
   sprite.setTexture(textureOne);
   sprite.setScale(2.0f, 2.0f);
-  sprite.setPosition(0, 708);
+  sprite.setPosition(0, 696);
 
   timer = 0.0f;
   animationStep = 0;
+  sprite.move(sf::Vector2f(0, 9.81f));
 }
 
 /**
@@ -20,29 +21,27 @@ Player::Player()
  */
 void Player::jumpPlayer(float deltaTime)
 {
-  float gravityDelta = gravity * deltaTime;
-
   if (input.isUpKeyPressed())
   {
     if (!isJumping)
     {
       isJumping = true;
       velocity.y = jumpVelocity;
-      airTime = 0.0f;
+     airTime = 0.0f;
     }
     else if (isJumping && velocity.y < 0.0f && airTime < maxAirTime)
     {
-      velocity.y -= gravityDelta;
+      velocity.y -= gravity * deltaTime;
     }
   }
   
   if (isJumping)
   {
     float descendingGravityDelta = gravity * 0.3f;
-    velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravityDelta;
+    velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravity * deltaTime;
     airTime += deltaTime;
     sprite.move(velocity * deltaTime);
-    
+  
     if (sprite.getPosition().y <= maxJumpHeight)
     {
       isJumping = false;
@@ -50,13 +49,6 @@ void Player::jumpPlayer(float deltaTime)
     }
   }
   sprite.move(velocity * deltaTime);
-
-  if (sprite.getPosition().y >= 708.0f)
-  {
-    sprite.setPosition(sprite.getPosition().x, 708.0f);
-    isJumping = false;
-    velocity.y = 0.0f;
-  }
 }
 
 /**
@@ -137,6 +129,16 @@ void Player::playerAnimation()
       }
     }
   }
+}
+
+void Player::resetVelocity()
+{
+  velocity.y = 0.0f;
+}
+
+void Player::fallingVelocity()
+{
+  velocity.y += gravity * deltaTime + 4.0f;
 }
 
 /**

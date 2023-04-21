@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include "../include/input.h"
+#include <cmath>
 
 class Player
 {
@@ -20,13 +21,17 @@ class Player
     const float jumpVelocity = -400.0f;
     const float maxJumpHeight = 50.0f;
     const float maxAirTime = 1.5f;
+    
     float airTime;
-    bool isJumping = false;
     float deltaTime;
     float timer;
+    
     int animationStep;
+    
     bool isMovingRight = false;
     bool isMovingLeft = false;
+    bool isOnGround = false;
+    bool isJumping = false;
 
   public:
     Player();
@@ -35,6 +40,8 @@ class Player
     void jumpPlayer(float deltaTime);
     void updatePlayerMovement();
     void playerAnimation();
+    void resetVelocity();
+    void fallingVelocity();
     sf::Sprite getSprite() const;
 };
 

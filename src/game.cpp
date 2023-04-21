@@ -43,6 +43,7 @@ void Game::gameWindow()
     {
       sf::sleep(sf::seconds(3));
       gameWindow.close();
+      delete sound;
     }
 
     // Checks if the player has collided with the second enemy.
@@ -50,14 +51,20 @@ void Game::gameWindow()
     {
       sf::sleep(sf::seconds(3));
       gameWindow.close();
+      delete sound;
     }
 
     // Checks if the player is touching the ground.
-    if (collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks()))
+    bool isOnGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
+    if (isOnGround)
     {
-      std::cout << "The player is touching the grounf" << std::endl;
+      player.resetVelocity();
     }
-
+    else 
+    {
+      player.fallingVelocity();
+    }
+    
     // Sets the camera to the player.
     sf::Vector2u windowSize = gameWindow.getSize();
     float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
