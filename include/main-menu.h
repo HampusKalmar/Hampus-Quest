@@ -7,12 +7,17 @@ class MainMenu
 {
   private:
     sf::Font font;
-    sf::Text titleText;
-    sf::Text startText;
-
+    sf::Text playText;
+    sf::Text exitText;
+    bool playPressed = false;
+    bool exitPressed = false;
+   
   public:
     MainMenu();
-    void show(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window);
+    void handleEvent(sf::Event& event);
+    bool isPlayPressed() const;
+    bool isExitPressed() const;
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "../include/enemy.h"
 #include "../include/collision.h"
 #include "../include/second-enemy.h"
+#include "../include/main-menu.h"
 
 /**
  * The gameWindow method initializes and manages the game window, handles user input events,
@@ -23,10 +24,13 @@ void Game::gameWindow()
   Collision collision;
   SecondEnemy secondEnemy;
   Background background;
+  MainMenu mainMenu;
  
   sf::RenderWindow gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar);
 
   gameWindow.setFramerateLimit(30);
+
+  mainMenu.draw(gameWindow);
 
   while (gameWindow.isOpen())
   {
@@ -36,8 +40,20 @@ void Game::gameWindow()
       {
         gameWindow.close();
       }
+      mainMenu.handleEvent(event);
     }
-
+    
+    if (mainMenu.isPlayPressed())
+    {
+      break;
+    }
+    else if (mainMenu.isExitPressed())
+    {
+      gameWindow.close();
+      delete sound;
+      return;
+    }
+    
     // Checks if the player has collided with the enemy.
     if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
     {
