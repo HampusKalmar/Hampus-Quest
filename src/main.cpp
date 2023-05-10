@@ -4,6 +4,6 @@ int main ()
 {
   Game game;
 
-  game.gameWindow();
+  game.start();
   return 0;
 }

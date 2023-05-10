@@ -11,11 +11,12 @@ class MainMenu
     sf::Text exitText;
     bool playPressed = false;
     bool exitPressed = false;
+    sf::Vector2i mousePos;
    
   public:
     MainMenu();
-    void draw(sf::RenderWindow& window);
     void handleEvent(sf::Event& event);
+    void display(sf::RenderTarget& target, sf::RenderStates states);
     bool isPlayPressed() const;
     bool isExitPressed() const;
 };

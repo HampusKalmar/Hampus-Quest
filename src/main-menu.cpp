@@ -13,17 +13,6 @@ MainMenu::MainMenu()
   exitText.setPosition(400.f, 350.f);
 }
 
-void MainMenu::draw(sf::RenderWindow& window)
-{
-  window.clear(sf::Color::Black);
-
-  window.draw(playText);
-  window.draw(exitText);
-
-  window.display();
-
-}
-
 void MainMenu::handleEvent(sf::Event& event)
 {
   if (event.type == sf::Event::MouseButtonPressed)
@@ -39,12 +28,30 @@ void MainMenu::handleEvent(sf::Event& event)
   }
 }
 
+void MainMenu::display(sf::RenderTarget& target, sf::RenderStates states)
+{
+  target.draw(playText, states);
+  target.draw(exitText, states);
+}
+
 bool MainMenu::isPlayPressed() const
 {
-  return playPressed;
+    if (playText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+  {
+    return true;
+  }
+
+  return false;
 }
 
 bool MainMenu::isExitPressed() const
 {
-  return exitPressed;
+  if (exitText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
