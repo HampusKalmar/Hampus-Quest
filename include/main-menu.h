@@ -9,6 +9,9 @@ class MainMenu
     sf::Font font;
     sf::Text playText;
     sf::Text exitText;
+    sf::Text headerText;
+    sf::Texture spriteTexture;
+    sf::Sprite sprite;
     bool playPressed = false;
     bool exitPressed = false;
     sf::Vector2i mousePos;
@@ -16,7 +19,7 @@ class MainMenu
   public:
     MainMenu();
     void handleEvent(sf::Event& event);
-    void display(sf::RenderTarget& target, sf::RenderStates states);
+    void displayMenu(sf::RenderWindow& window);
     bool isPlayPressed() const;
     bool isExitPressed() const;
 };

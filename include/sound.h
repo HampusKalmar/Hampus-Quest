@@ -8,9 +8,13 @@ class Sound
 {
   private:
     sf::Music music;
+    sf::Music inGameMusic;
 
   public:
-    int menuMusic(); 
+    int menuMusic();
+    void stopMenuMusic();
+    int gameMusic();
+    void stopGameMusic();
 };
 
 #endif

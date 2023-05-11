@@ -58,13 +58,16 @@ void Game::gameCollision()
 {
   if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
   {
+    sound->stopGameMusic();
     sf::sleep(sf::seconds(3));
     gameWindow.close();
+    delete sound;
   }
 
   // Checks if the player has collided with the second enemy.
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
   {
+    sound->stopGameMusic();
     sf::sleep(sf::seconds(3));
     gameWindow.close();
     delete sound;
@@ -89,11 +92,11 @@ void Game::handleEvents()
 {
   while (gameWindow.pollEvent(event))
   {
+    mainMenu->handleEvent(event);
     if (event.type == sf::Event::Closed)
     {
       gameWindow.close();
     }
-    mainMenu->handleEvent(event);
   }
 }
 
@@ -102,13 +105,44 @@ void Game::handleEvents()
  */
 void Game::gameLoop()
 {
+  gameWindow.setActive(true);
+  bool gameStarted = false;
+  bool menuMusicIsPlaying = false;
+  bool inGameMusicIsPlaying = false;
+
   while (gameWindow.isOpen())
   {
     handleEvents();
-    gameCollision();
-    setCamera();
-    drawGameObjects();
+    if (mainMenu->isExitPressed())
+    {
+      gameWindow.close();
+    }
+    else if (mainMenu->isPlayPressed())
+    {
+      gameStarted = true;
+      sound->stopMenuMusic();
+      sound->gameMusic();
+    }
+
+    if (gameStarted)
+    {
+      gameCollision();
+      setCamera();
+      drawGameObjects();
+      inGameMusicIsPlaying = true;
+    }
+    else
+    {
+      mainMenu->displayMenu(gameWindow);
+      if (!menuMusicIsPlaying)
+      {
+        sound->menuMusic();
+        menuMusicIsPlaying = true;
+      }
+    }
   }
+  delete mainMenu;
+  delete sound;
 }
 
 /**

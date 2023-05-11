@@ -2,15 +2,37 @@
 
 MainMenu::MainMenu()
 {
+  if (!font.loadFromFile("assets/fonts/slkscre.ttf"))
+  {
+    std::cout << "Error" << std::endl;
+  }
+
+  if (!spriteTexture.loadFromFile("assets/images/newSpriteOne.png"))
+  {
+    std::cout << "Failed" << std::endl;
+  }
+
+  sprite.setTexture(spriteTexture);
+  sprite.setScale(6.0f, 6.0f);
+  sprite.setPosition(429, 550);
+
+  headerText.setFont(font);
+  headerText.setString("Hampus Quest");
+  headerText.setCharacterSize(80);
+  headerText.setFillColor(sf::Color::White);
+  headerText.setPosition(120.f, 50.f);
+
+  playText.setFont(font);
   playText.setString("Play");
   playText.setCharacterSize(50);
   playText.setFillColor(sf::Color::White);
-  playText.setPosition(400.f, 200.f);
+  playText.setPosition(420.f, 200.f);
 
+  exitText.setFont(font);
   exitText.setString("Exit");
   exitText.setCharacterSize(50);
   exitText.setFillColor(sf::Color::White);
-  exitText.setPosition(400.f, 350.f);
+  exitText.setPosition(425.f, 350.f);
 }
 
 void MainMenu::handleEvent(sf::Event& event)
@@ -26,17 +48,34 @@ void MainMenu::handleEvent(sf::Event& event)
       exitPressed = true;
     }
   }
+
+  if (event.type == sf::Event::MouseButtonReleased)
+  {
+    if (playText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    {
+      playPressed = false;
+    }
+    else if (exitText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    {
+      exitPressed = false;
+    }
+  }
 }
 
-void MainMenu::display(sf::RenderTarget& target, sf::RenderStates states)
+void MainMenu::displayMenu(sf::RenderWindow& window)
 {
-  target.draw(playText, states);
-  target.draw(exitText, states);
+  mousePos = sf::Mouse::getPosition(window);
+  window.clear(sf::Color::Black);
+  window.draw(headerText);
+  window.draw(playText);
+  window.draw(exitText);
+  window.draw(sprite);
+  window.display();
 }
 
 bool MainMenu::isPlayPressed() const
 {
-    if (playText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+    if (playPressed)
   {
     return true;
   }
@@ -46,7 +85,7 @@ bool MainMenu::isPlayPressed() const
 
 bool MainMenu::isExitPressed() const
 {
-  if (exitText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+  if (exitPressed)
   {
     return true;
   }
