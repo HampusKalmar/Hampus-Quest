@@ -23,7 +23,6 @@ Game::~Game()
  */
 void Game::setCamera()
 {
-  // Sets the camera to the player.
   sf::Vector2u windowSize = gameWindow.getSize();
   float viewX = player.getSprite().getPosition().x - windowSize.x / 2.0f;
   float viewY = player.getSprite().getPosition().y - windowSize.y / 2.0f;
@@ -61,19 +60,17 @@ void Game::gameCollision()
     sound->stopGameMusic();
     sf::sleep(sf::seconds(3));
     gameWindow.close();
-    delete sound;
+    //delete sound;
   }
 
-  // Checks if the player has collided with the second enemy.
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
   {
     sound->stopGameMusic();
     sf::sleep(sf::seconds(3));
     gameWindow.close();
-    delete sound;
+    //delete sound;
   }
 
-  // Checks if the player is touching the ground.
   bool isOnGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
   if (isOnGround)
   {

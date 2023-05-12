@@ -2,7 +2,7 @@
 
 int Sound::menuMusic()
 {
-  if (!music.openFromFile("assets/sounds/mainMenuSong.wav"))
+  if (!music.openFromFile("assets/sounds/songTwo.wav"))
   {
     std::cout << "Music cannot play right now" << std::endl;
     return 1;
@@ -21,7 +21,7 @@ void Sound::stopMenuMusic()
 
 int Sound::gameMusic()
 {
-  if (!inGameMusic.openFromFile("assets/sounds/inGameSong.wav"))
+  if (!inGameMusic.openFromFile("assets/sounds/songOne.wav"))
   {
     std::cout << "The game music cant play right now" << std::endl;
     return 1;
