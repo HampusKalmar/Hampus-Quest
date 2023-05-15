@@ -8,7 +8,7 @@ GameOverMenu::GameOverMenu()
   }
 
   retryText.setFont(font);
-  retryText.setString("try again");
+  retryText.setString("Try again");
   retryText.setCharacterSize(50);
   retryText.setFillColor(sf::Color::White);
   retryText.setPosition(420.f, 200.f);
@@ -51,8 +51,7 @@ void GameOverMenu::handleEvent(sf::Event& event)
 void GameOverMenu::displayMenu(sf::RenderWindow& window)
 {
   mousePos = sf::Mouse::getPosition(window);
-  window.clear(sf::Color::Black);
-  window.draw(headerText);
+  window.clear(sf::Color(0, 0, 70));
   window.draw(retryText);
   window.draw(exitText);
   window.display();

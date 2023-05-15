@@ -37,7 +37,6 @@ void Game::setCamera()
 void Game::drawGameObjects()
 {
   gameWindow.clear(sf::Color(0, 0, 70));
-  //background.backgroundColor(gameWindow, sf::Color(0, 0, 70), sf::Color::Black);
   gameWindow.draw(enemy.getEnemySprite());
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);
@@ -102,6 +101,7 @@ void Game::gameLoop()
 {
   gameWindow.setActive(true);
   theGameIsOver = false;
+  gameStarted = false;
 
   while (gameWindow.isOpen())
   {
@@ -119,10 +119,28 @@ void Game::gameLoop()
 
     if (gameStarted)
     {
-      gameCollision();
-      setCamera();
-      drawGameObjects();
-      inGameMusicIsPlaying = true;
+      if (!theGameIsOver) // Add a check to avoid updating the game state after game over
+      {
+        gameCollision();
+        setCamera();
+        drawGameObjects();
+      }
+
+      if (!theGameIsOver) // Add a check to avoid playing the menu music during game over
+      {
+        if (!inGameMusicIsPlaying)
+        {
+          sound->gameMusic();
+          inGameMusicIsPlaying = true;
+        }
+      }
+      else
+      {
+        theGameIsOver = false;
+        gameWindow.clear();
+        gameOverMenu->displayMenu(gameWindow);
+        gameWindow.display();
+      }
     }
     else
     {
@@ -134,8 +152,8 @@ void Game::gameLoop()
       }
     }
   }
-  delete mainMenu;
   delete sound;
+  delete mainMenu;
   delete gameOverMenu;
 }
 
