@@ -8,7 +8,7 @@ Enemy::Enemy()
 
   sprite.setTexture(textureOne);
   sprite.setScale(2.0f, 2.0f);
-  sprite.setPosition(200, 700);
+  sprite.setPosition(200, 730);
 
   timer = 0.0f;
   animationStep = 0;
@@ -24,7 +24,7 @@ void Enemy::leftEnemyMovement()
 
 void Enemy::rightEnemyMovement()
 {
-  if (sprite.getPosition().x < 400)
+  if (sprite.getPosition().x < 280)
   {
     sprite.move(sf::Vector2f(1.17f, 0.f));
   }
@@ -36,7 +36,7 @@ void Enemy::updateEnemyMovement()
   {
     isMovingRight = true;
   }
-  else if (sprite.getPosition().x >= 400)
+  else if (sprite.getPosition().x >= 280)
   {
     isMovingRight = false;
   }

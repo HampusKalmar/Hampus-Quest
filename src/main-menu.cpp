@@ -65,7 +65,7 @@ void MainMenu::handleEvent(sf::Event& event)
 void MainMenu::displayMenu(sf::RenderWindow& window)
 {
   mousePos = sf::Mouse::getPosition(window);
-  window.clear(sf::Color::Black);
+  window.clear(sf::Color(0, 0, 70));
   window.draw(headerText);
   window.draw(playText);
   window.draw(exitText);

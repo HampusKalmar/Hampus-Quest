@@ -16,6 +16,7 @@ Game::~Game()
 {
   delete sound;
   delete mainMenu;
+  delete gameOverMenu;
 }
 
 /**
@@ -35,8 +36,8 @@ void Game::setCamera()
  */
 void Game::drawGameObjects()
 {
-  gameWindow.clear();
-  background.backgroundColor(gameWindow, sf::Color(0, 0, 70), sf::Color::Black);
+  gameWindow.clear(sf::Color(0, 0, 70));
+  //background.backgroundColor(gameWindow, sf::Color(0, 0, 70), sf::Color::Black);
   gameWindow.draw(enemy.getEnemySprite());
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);
@@ -58,17 +59,13 @@ void Game::gameCollision()
   if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
   {
     sound->stopGameMusic();
-    sf::sleep(sf::seconds(3));
-    gameWindow.close();
-    //delete sound;
+    gameOver();
   }
 
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
   {
     sound->stopGameMusic();
-    sf::sleep(sf::seconds(3));
-    gameWindow.close();
-    //delete sound;
+    gameOver();
   }
 
   bool isOnGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
@@ -90,6 +87,7 @@ void Game::handleEvents()
   while (gameWindow.pollEvent(event))
   {
     mainMenu->handleEvent(event);
+    gameOverMenu->handleEvent(event);
     if (event.type == sf::Event::Closed)
     {
       gameWindow.close();
@@ -103,9 +101,7 @@ void Game::handleEvents()
 void Game::gameLoop()
 {
   gameWindow.setActive(true);
-  bool gameStarted = false;
-  bool menuMusicIsPlaying = false;
-  bool inGameMusicIsPlaying = false;
+  theGameIsOver = false;
 
   while (gameWindow.isOpen())
   {
@@ -140,6 +136,16 @@ void Game::gameLoop()
   }
   delete mainMenu;
   delete sound;
+  delete gameOverMenu;
+}
+
+void Game::gameOver()
+{
+  sound->stopGameMusic();
+  gameWindow.clear();
+  gameOverMenu->displayMenu(gameWindow);
+  theGameIsOver = true;
+  gameWindow.display();
 }
 
 /**

@@ -11,6 +11,7 @@
 #include "../include/collision.h"
 #include "../include/second-enemy.h"
 #include "../include/main-menu.h"
+#include "../include/gameOverMenu.h"
 #include <iostream>
 
 class Game
@@ -28,6 +29,11 @@ class Game
     SecondEnemy secondEnemy;
     Background background;
     MainMenu* mainMenu = new MainMenu();
+    GameOverMenu* gameOverMenu = new GameOverMenu();
+    bool theGameIsOver = false;
+    bool gameStarted = false;
+    bool menuMusicIsPlaying = false;
+    bool inGameMusicIsPlaying = false;
 
   public:
     Game();
@@ -37,6 +43,7 @@ class Game
     void setCamera();
     void drawGameObjects();
     void gameLoop();
+    void gameOver();
     void start();
 
 };

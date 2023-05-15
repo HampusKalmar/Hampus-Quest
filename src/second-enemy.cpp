@@ -23,7 +23,7 @@ void SecondEnemy::upEnemyMovement()
 
 void SecondEnemy::downEnemyMovement()
 {
-   if (sprite.getPosition().y < 660.0f)
+   if (sprite.getPosition().y < 700.0f)
   {
     sprite.move(sf::Vector2f(0.0f, 2.2f));
   }
@@ -35,7 +35,7 @@ void SecondEnemy::updateSecondEnemyMovement()
   {
     isMovingUp = false;
   }
-  else if (sprite.getPosition().y >= 660.0f)
+  else if (sprite.getPosition().y >= 700.0f)
   {
     isMovingUp = true;
   }
