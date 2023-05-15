@@ -28,6 +28,10 @@ class Game
     Collision collision;
     SecondEnemy secondEnemy;
     Background background;
+    sf::Texture trophyTexture;
+    sf::Sprite trophySprite;
+    sf::Font font;
+    sf::Text congratulationsText;
     MainMenu* mainMenu = new MainMenu();
     GameOverMenu* gameOverMenu = new GameOverMenu();
     bool theGameIsOver = false;
@@ -45,6 +49,8 @@ class Game
     void gameLoop();
     void gameOver();
     void start();
+    void gameWon();
+    sf::Sprite getTrophySprite();
 
 };
 

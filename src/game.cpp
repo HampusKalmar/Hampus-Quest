@@ -7,6 +7,13 @@ Game::Game() :
   gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar)
 {
   gameWindow.setFramerateLimit(30);
+  if (!trophyTexture.loadFromFile("assets/images/trophy.png"))
+  {
+    std::cout << "Could not load the trophy texture" << std::endl;
+  }
+  trophySprite.setTexture(trophyTexture);
+  trophySprite.setScale(1.5f, 1.5f);
+  trophySprite.setPosition(1460, 747);
 }
 
 /**
@@ -41,6 +48,7 @@ void Game::drawGameObjects()
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);
   gameWindow.draw(player.getSprite());
+  gameWindow.draw(getTrophySprite());
   player.playerAnimation();
   player.updatePlayerMovement();
   enemy.enemyAnimation();
@@ -65,6 +73,11 @@ void Game::gameCollision()
   {
     sound->stopGameMusic();
     gameOver();
+  }
+
+  if (collision.checkSpriteCollision(player.getSprite(), trophySprite))
+  {
+    gameWon();
   }
 
   bool isOnGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
@@ -164,6 +177,31 @@ void Game::gameOver()
   gameOverMenu->displayMenu(gameWindow);
   theGameIsOver = true;
   gameWindow.display();
+}
+
+void Game::gameWon()
+{
+  sound->stopGameMusic();
+  gameWindow.clear();
+
+  if (!font.loadFromFile("assets/fonts/slkscre.ttf"))
+  {
+    std::cout << "Could not load the font" << std::endl;
+  }
+
+  congratulationsText.setFont(font);
+  congratulationsText.setString("Congratulations! You have Won the Game");
+  congratulationsText.setCharacterSize(20);
+  congratulationsText.setFillColor(sf::Color::White);
+  congratulationsText.setPosition(1180, 450);
+
+  gameWindow.draw(congratulationsText);
+  gameWindow.display();
+}
+
+sf::Sprite Game::getTrophySprite()
+{
+  return trophySprite;
 }
 
 /**
