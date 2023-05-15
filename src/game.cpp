@@ -13,7 +13,7 @@ Game::Game() :
   }
   trophySprite.setTexture(trophyTexture);
   trophySprite.setScale(1.5f, 1.5f);
-  trophySprite.setPosition(1460, 747);
+  trophySprite.setPosition(993, 747);
 }
 
 /**
@@ -193,7 +193,7 @@ void Game::gameWon()
   congratulationsText.setString("Congratulations! You have Won the Game");
   congratulationsText.setCharacterSize(20);
   congratulationsText.setFillColor(sf::Color::White);
-  congratulationsText.setPosition(1180, 450);
+  congratulationsText.setPosition(740, 450);
 
   gameWindow.draw(congratulationsText);
   gameWindow.display();
