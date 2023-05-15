@@ -9,7 +9,7 @@ Player::Player()
   textureTwo.loadFromFile("assets/images/newSpriteTwo.png");
   sprite.setTexture(textureOne);
   sprite.setScale(2.0f, 2.0f);
-  sprite.setPosition(0, 696);
+  sprite.setPosition(50, 700);
 
   timer = 0.0f;
   animationStep = 0;
@@ -23,18 +23,20 @@ void Player::jumpPlayer(float deltaTime)
 {
   if (input.isUpKeyPressed())
   {
-    if (!isJumping)
+    if (!isJumping && !isFalling)
     {
       isJumping = true;
+      isOnGround = false;
+      initialJumpHeight = sprite.getPosition().y;
       velocity.y = jumpVelocity;
-     airTime = 0.0f;
+      airTime = 0.0f;
     }
     else if (isJumping && velocity.y < 0.0f && airTime < maxAirTime)
     {
       velocity.y -= gravity * deltaTime;
     }
   }
-  
+
   if (isJumping)
   {
     float descendingGravityDelta = gravity * 0.3f;
@@ -42,11 +44,21 @@ void Player::jumpPlayer(float deltaTime)
     airTime += deltaTime;
     sprite.move(velocity * deltaTime);
   
-    if (sprite.getPosition().y <= maxJumpHeight)
+    if (sprite.getPosition().y >= initialJumpHeight)
     {
       isJumping = false;
-      velocity.y += downVelocity;
+      sprite.setPosition(sprite.getPosition().x, initialJumpHeight);
+      velocity.y = 0.0f;
     }
+  }
+
+  if (velocity.y > 0.0f && !isFalling)
+  {
+    isFalling = true;
+  }
+  else
+  {
+    isFalling = false;
   }
   sprite.move(velocity * deltaTime);
 }
@@ -138,7 +150,7 @@ void Player::resetVelocity()
 
 void Player::fallingVelocity()
 {
-  velocity.y += gravity * deltaTime + 4.0f;
+  velocity.y += gravity * deltaTime + 22.0f;
 }
 
 /**
