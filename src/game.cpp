@@ -75,6 +75,14 @@ void Game::gameCollision()
     gameOver();
   }
 
+  float fallingThreshold = 950.0f;
+
+  if (player.getSprite().getPosition().y > fallingThreshold)
+  {
+    sound->stopGameMusic();
+    gameOver();
+  }
+
   if (collision.checkSpriteCollision(player.getSprite(), trophySprite))
   {
     gameWon();
@@ -128,6 +136,15 @@ void Game::gameLoop()
       gameStarted = true;
       sound->stopMenuMusic();
       sound->gameMusic();
+    }
+
+    if (gameOverMenu->isRetryPressed())
+    {
+      mainMenu->displayMenu(gameWindow);
+    }
+    else if (gameOverMenu->isExitPressed())
+    {
+      gameWindow.close();
     }
 
     if (gameStarted)
@@ -190,13 +207,16 @@ void Game::gameWon()
   }
 
   congratulationsText.setFont(font);
-  congratulationsText.setString("Congratulations! You have Won the Game");
+  congratulationsText.setString("Congratulations! You have won the game");
   congratulationsText.setCharacterSize(20);
   congratulationsText.setFillColor(sf::Color::White);
-  congratulationsText.setPosition(740, 450);
+  congratulationsText.setPosition(735, 400);
 
   gameWindow.draw(congratulationsText);
   gameWindow.display();
+
+  sf::sleep(sf::seconds(3));
+  gameWindow.close();
 }
 
 sf::Sprite Game::getTrophySprite()
