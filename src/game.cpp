@@ -66,12 +66,14 @@ void Game::gameCollision()
   if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
   {
     sound->stopGameMusic();
+    theGameIsOver = true;
     gameOver();
   }
 
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
   {
     sound->stopGameMusic();
+    theGameIsOver = true;
     gameOver();
   }
 
@@ -80,6 +82,7 @@ void Game::gameCollision()
   if (player.getSprite().getPosition().y > fallingThreshold)
   {
     sound->stopGameMusic();
+    theGameIsOver = true;
     gameOver();
   }
 
@@ -149,14 +152,14 @@ void Game::gameLoop()
 
     if (gameStarted)
     {
-      if (!theGameIsOver) // Add a check to avoid updating the game state after game over
+      if (!theGameIsOver)
       {
         gameCollision();
         setCamera();
         drawGameObjects();
       }
 
-      if (!theGameIsOver) // Add a check to avoid playing the menu music during game over
+      if (!theGameIsOver)
       {
         if (!inGameMusicIsPlaying)
         {
@@ -166,9 +169,8 @@ void Game::gameLoop()
       }
       else
       {
-        theGameIsOver = false;
         gameWindow.clear();
-        gameOverMenu->displayMenu(gameWindow);
+        gameOverMenu->displayMenu(gameWindow, player.getSprite());
         gameWindow.display();
       }
     }
@@ -187,15 +189,42 @@ void Game::gameLoop()
   delete gameOverMenu;
 }
 
+/**
+ * The game over method that ckecks if the game is over.
+ */
 void Game::gameOver()
 {
   sound->stopGameMusic();
-  gameWindow.clear();
-  gameOverMenu->displayMenu(gameWindow);
   theGameIsOver = true;
+  gameWindow.clear();
+  gameOverMenu->displayMenu(gameWindow, player.getSprite());
   gameWindow.display();
+
+   while (theGameIsOver)
+  {
+    handleEvents();
+
+    if (gameOverMenu->isRetryPressed())
+    {
+      theGameIsOver = false; // Reset the game over flag
+      gameStarted = true; // Set gameStarted to true to start the game again
+      sound->gameMusic(); // Start the game music again
+      gameWindow.clear();
+      gameLoop();
+      break;
+    }
+    else if (gameOverMenu->isExitPressed())
+    {
+      mainMenu->displayMenu(gameWindow);
+      theGameIsOver = false; // Set the game over flag to exit the loop
+      break;
+    }
+  }
 }
 
+/**
+ * A method that creates a text saying the player has won the game.
+ */
 void Game::gameWon()
 {
   sound->stopGameMusic();

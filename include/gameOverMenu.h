@@ -14,11 +14,12 @@ class GameOverMenu
     bool retryPressed = false;
     bool exitPressed = false;
     sf::Vector2i mousePos;
+    sf::Vector2f textOffset;
    
   public:
     GameOverMenu();
     void handleEvent(sf::Event& event);
-    void displayMenu(sf::RenderWindow& window);
+    void displayMenu(sf::RenderWindow& window, const sf::Sprite& playerSprite);
     bool isRetryPressed() const;
     bool isExitPressed() const;
 };

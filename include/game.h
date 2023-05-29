@@ -50,6 +50,7 @@ class Game
     void gameOver();
     void start();
     void gameWon();
+    void resetGame();
     sf::Sprite getTrophySprite();
 
 };
