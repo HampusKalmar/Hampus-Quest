@@ -31,18 +31,23 @@ class Game
     sf::Texture trophyTexture;
     sf::Sprite trophySprite;
     sf::Font font;
+    sf::Font gameOverFont;
     sf::Text congratulationsText;
+    sf::Text gameOverText;
     MainMenu* mainMenu = new MainMenu();
     GameOverMenu* gameOverMenu = new GameOverMenu();
     bool theGameIsOver = false;
     bool gameStarted = false;
     bool menuMusicIsPlaying = false;
     bool inGameMusicIsPlaying = false;
+    bool returnToMainMenu = false;
+    bool restartGame = false;
 
   public:
     Game();
     ~Game();
     void handleEvents();
+    void handleMenuEvents();
     void gameCollision();
     void setCamera();
     void drawGameObjects();

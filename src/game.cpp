@@ -67,14 +67,12 @@ void Game::gameCollision()
   {
     sound->stopGameMusic();
     theGameIsOver = true;
-    gameOver();
   }
 
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
   {
     sound->stopGameMusic();
     theGameIsOver = true;
-    gameOver();
   }
 
   float fallingThreshold = 950.0f;
@@ -83,7 +81,6 @@ void Game::gameCollision()
   {
     sound->stopGameMusic();
     theGameIsOver = true;
-    gameOver();
   }
 
   if (collision.checkSpriteCollision(player.getSprite(), trophySprite))
@@ -110,7 +107,7 @@ void Game::handleEvents()
   while (gameWindow.pollEvent(event))
   {
     mainMenu->handleEvent(event);
-    gameOverMenu->handleEvent(event);
+    gameOverMenu->handleGameOverMenuEvent(event);
     if (event.type == sf::Event::Closed)
     {
       gameWindow.close();
@@ -132,6 +129,7 @@ void Game::gameLoop()
     handleEvents();
     if (mainMenu->isExitPressed())
     {
+      gameStarted = false;
       gameWindow.close();
     }
     else if (mainMenu->isPlayPressed())
@@ -141,12 +139,9 @@ void Game::gameLoop()
       sound->gameMusic();
     }
 
-    if (gameOverMenu->isRetryPressed())
+    if (gameOverMenu->isExitTheGamePressed())
     {
-      mainMenu->displayMenu(gameWindow);
-    }
-    else if (gameOverMenu->isExitPressed())
-    {
+      gameStarted = false;
       gameWindow.close();
     }
 
@@ -182,42 +177,6 @@ void Game::gameLoop()
         sound->menuMusic();
         menuMusicIsPlaying = true;
       }
-    }
-  }
-  delete sound;
-  delete mainMenu;
-  delete gameOverMenu;
-}
-
-/**
- * The game over method that ckecks if the game is over.
- */
-void Game::gameOver()
-{
-  sound->stopGameMusic();
-  theGameIsOver = true;
-  gameWindow.clear();
-  gameOverMenu->displayMenu(gameWindow, player.getSprite());
-  gameWindow.display();
-
-   while (theGameIsOver)
-  {
-    handleEvents();
-
-    if (gameOverMenu->isRetryPressed())
-    {
-      theGameIsOver = false; // Reset the game over flag
-      gameStarted = true; // Set gameStarted to true to start the game again
-      sound->gameMusic(); // Start the game music again
-      gameWindow.clear();
-      gameLoop();
-      break;
-    }
-    else if (gameOverMenu->isExitPressed())
-    {
-      mainMenu->displayMenu(gameWindow);
-      theGameIsOver = false; // Set the game over flag to exit the loop
-      break;
     }
   }
 }

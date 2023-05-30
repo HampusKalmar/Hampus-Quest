@@ -7,21 +7,21 @@ class GameOverMenu
 {
   private:
     sf::Font font;
+    sf::Font gameOverFont;
     sf::Text retryText;
-    sf::Text exitText;
+    sf::Text exitTheGameText;
     sf::Text gameOverText;
     sf::Text headerText;
-    bool retryPressed = false;
     bool exitPressed = false;
     sf::Vector2i mousePos;
     sf::Vector2f textOffset;
+    sf::Vector2f menuPos;
    
   public:
     GameOverMenu();
-    void handleEvent(sf::Event& event);
+    void handleGameOverMenuEvent(sf::Event& event);
     void displayMenu(sf::RenderWindow& window, const sf::Sprite& playerSprite);
-    bool isRetryPressed() const;
-    bool isExitPressed() const;
+    bool isExitTheGamePressed() const;
 };
 
 #endif

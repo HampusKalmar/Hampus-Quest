@@ -5,7 +5,7 @@
 class PlayerPositionTest : public ::testing::Test
 {
   public:
-    virtual void SetUp()
+    virtual void setUp()
     {
       testWindow = new sf::RenderWindow(sf::VideoMode(1000, 900), "Test Window");
       texture.loadFromFile("assets/images/newSpriteOne.png");
@@ -13,10 +13,9 @@ class PlayerPositionTest : public ::testing::Test
       sprite.setScale(2.0f, 2.0f);
       sprite.setPosition(50, 700);
       player.getSprite() = sprite;
-
     }
   public:
-    virtual void TearDown()
+    virtual void tearDown()
     {
       delete testWindow;
     }

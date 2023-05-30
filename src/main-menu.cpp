@@ -23,39 +23,39 @@ MainMenu::MainMenu()
   headerText.setPosition(120.f, 50.f);
 
   playText.setFont(font);
-  playText.setString("Play");
-  playText.setCharacterSize(50);
+  playText.setString("Press enter to play");
+  playText.setCharacterSize(40);
   playText.setFillColor(sf::Color::White);
-  playText.setPosition(420.f, 200.f);
+  playText.setPosition(200.f, 200.f);
 
   exitText.setFont(font);
-  exitText.setString("Exit");
-  exitText.setCharacterSize(50);
+  exitText.setString("press escape to exit");
+  exitText.setCharacterSize(40);
   exitText.setFillColor(sf::Color::White);
-  exitText.setPosition(425.f, 350.f);
+  exitText.setPosition(200.f, 350.f);
 }
 
 void MainMenu::handleEvent(sf::Event& event)
 {
-  if (event.type == sf::Event::MouseButtonPressed)
+  if (event.type == sf::Event::KeyPressed)
   {
-    if (playText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    if (event.key.code == sf::Keyboard::Enter)
     {
       playPressed = true;
     }
-    else if (exitText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    else if (event.key.code == sf::Keyboard::Escape)
     {
       exitPressed = true;
     }
   }
 
-  if (event.type == sf::Event::MouseButtonReleased)
+  if (event.type == sf::Event::KeyReleased)
   {
-    if (playText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    if (event.key.code == sf::Keyboard::Enter)
     {
       playPressed = false;
     }
-    else if (exitText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    else if (event.key.code == sf::Keyboard::Escape)
     {
       exitPressed = false;
     }
@@ -75,12 +75,14 @@ void MainMenu::displayMenu(sf::RenderWindow& window)
 
 bool MainMenu::isPlayPressed() const
 {
-    if (playPressed)
+  if (playPressed)
   {
     return true;
   }
-
-  return false;
+  else
+  {
+    return false;
+  }
 }
 
 bool MainMenu::isExitPressed() const

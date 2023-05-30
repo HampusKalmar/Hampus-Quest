@@ -7,39 +7,36 @@ GameOverMenu::GameOverMenu()
     std::cout << "Error" << std::endl;
   }
 
-  retryText.setFont(font);
-  retryText.setString("Try again");
-  retryText.setCharacterSize(35);
-  retryText.setFillColor(sf::Color::White);
+  if (!gameOverFont.loadFromFile("assets/fonts/slkscre.ttf"))
+  {
+    std::cout << "Error" << std::endl;
+  }
 
-  exitText.setFont(font);
-  exitText.setString("Exit to main menu");
-  exitText.setCharacterSize(35);
-  exitText.setFillColor(sf::Color::White);
+  gameOverText.setFont(gameOverFont);
+  gameOverText.setString("GAME OVER");
+  gameOverText.setCharacterSize(40);
+  gameOverText.setFillColor(sf::Color::White);
+
+  exitTheGameText.setFont(font);
+  exitTheGameText.setString("Press escape to exit the game and then retry");
+  exitTheGameText.setCharacterSize(25);
+  exitTheGameText.setFillColor(sf::Color::White);
 }
 
 
-void GameOverMenu::handleEvent(sf::Event& event)
+void GameOverMenu::handleGameOverMenuEvent(sf::Event& event)
 {
-  if (event.type == sf::Event::MouseButtonPressed)
+   if (event.type == sf::Event::KeyPressed)
   {
-    if (retryText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-    {
-      retryPressed = true;
-    }
-    else if (exitText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    if (event.key.code == sf::Keyboard::Escape)
     {
       exitPressed = true;
     }
   }
 
-  if (event.type == sf::Event::MouseButtonReleased)
+   if (event.type == sf::Event::KeyReleased)
   {
-    if (retryText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-    {
-      retryPressed = false;
-    }
-    else if (exitText.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+    if (event.key.code == sf::Keyboard::Escape)
     {
       exitPressed = false;
     }
@@ -48,28 +45,23 @@ void GameOverMenu::handleEvent(sf::Event& event)
 
 void GameOverMenu::displayMenu(sf::RenderWindow& window, const sf::Sprite& playerSprite)
 {
-  mousePos = sf::Mouse::getPosition(window);
   window.clear(sf::Color(0, 0, 70));
- 
-  retryText.setPosition(450.f + textOffset.x, 200.f + textOffset.y);
-  exitText.setPosition(425.f + textOffset.x, 350.f + textOffset.y);
 
-  window.draw(retryText);
-  window.draw(exitText);
+  sf::Vector2f playerPosition = playerSprite.getPosition();
+  sf::Vector2u windowSize = window.getSize();
+
+  sf::Vector2f menuPosition(playerPosition.x - (windowSize.x / 2), playerPosition.y - (windowSize.y / 2));
+
+  exitTheGameText.setPosition(menuPosition.x + 90.f, menuPosition.y + 350.f);
+  gameOverText.setPosition(menuPosition.x + 360.f, menuPosition.y + 250.f);
+
+  window.draw(gameOverText);
+  window.draw(exitTheGameText);
   window.display();
 }
 
-bool GameOverMenu::isRetryPressed() const
-{
-    if (retryPressed)
-  {
-    return true;
-  }
 
-  return false;
-}
-
-bool GameOverMenu::isExitPressed() const
+bool GameOverMenu::isExitTheGamePressed() const
 {
   if (exitPressed)
   {
