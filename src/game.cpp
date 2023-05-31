@@ -108,6 +108,7 @@ void Game::handleEvents()
   {
     mainMenu->handleEvent(event);
     gameOverMenu->handleGameOverMenuEvent(event);
+  
     if (event.type == sf::Event::Closed)
     {
       gameWindow.close();
