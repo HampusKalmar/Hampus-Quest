@@ -16,7 +16,7 @@ Enemy::Enemy()
 
 void Enemy::leftEnemyMovement()
 {
-  if (sprite.getPosition().x > 100)
+  if (sprite.getPosition().x > 165)
   {
     sprite.move(sf::Vector2f(- 1.17f, 0.f));
   }
@@ -32,7 +32,7 @@ void Enemy::rightEnemyMovement()
 
 void Enemy::updateEnemyMovement()
 {
-  if (sprite.getPosition().x <= 100)
+  if (sprite.getPosition().x <= 165)
   {
     isMovingRight = true;
   }
@@ -44,7 +44,6 @@ void Enemy::updateEnemyMovement()
   if (isMovingRight)
   {
     sprite.setScale(- 2.0f, 2.0f);
-    //sprite.setOrigin(sprite.getLocalBounds().width / 1.f, sprite.getLocalBounds().height / 1.f);
     rightEnemyMovement();
   }
   else
