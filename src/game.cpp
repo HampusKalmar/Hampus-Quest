@@ -17,7 +17,7 @@ Game::Game() :
 }
 
 /**
- * The Game destructor frees the memory allocated to the sound and the main menu objects.
+ * The Game destructor frees the memory allocated to the Sound, the MainMenu and the GameOverMenu objects.
  */
 Game::~Game()
 {
@@ -27,7 +27,7 @@ Game::~Game()
 }
 
 /**
- * Sets the view of the game indow to the player.
+ * Sets the view of the game window to the player.
  */
 void Game::setCamera()
 {
