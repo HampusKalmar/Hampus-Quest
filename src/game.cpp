@@ -183,7 +183,7 @@ void Game::gameLoop()
 }
 
 /**
- * A method that creates a text saying the player has won the game.
+ * A method that creates a text showing the player has won the game.
  */
 void Game::gameWon()
 {
@@ -214,7 +214,7 @@ sf::Sprite Game::getTrophySprite()
 }
 
 /**
- * A start method that starts the main game loop.
+ * A start method that starts the main game loop and will be called in main.
  */
 void Game::start()
 {
