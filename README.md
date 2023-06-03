@@ -1,9 +1,19 @@
-# Ditt projekt
+# Hampus Quest
 
-Detta är ditt projekts GitLab-projekt och här hittar du bland annat Wikin i vilken du ska dokumentera ditt projekt. Du hittar länk till din Wiki i menyn till vänster.
+This is a game created in C++ using the SFML library.
+Controls:
 
-Detta GitLab-projekt kan du använda för att spara ner saker som hör till din applikation som helhet men du bör skapa egna projekt för respektive del i ditt projekt. Kanske ett projekt för en webbklient och ett för ett API. Ska du ta fram flera _"microservices"_? Då kanske ett GitLab-projekt per service är att föredra. Har du bara en kodbas så kan du naturligtvis använda detta GitLab-projekt, men observera att du inte är "maintainer" på detta projekt varför du inte kan skapa egna pipelines.
+    Use the W key to jump.
+    Use the A key to move left.
+    Use the D key to move right.
+    Alternatively, you can also use the Up arrow key to jump, the Left arrow key to move left, and the Right arrow key to move right.
 
-Det är på detta GitLab-projekt du kommer att göra din _"merge request"_.
 
-👉 __Ersätt gärna denna sida med eget innehåll.__
+# Game Description 
+
+Hampus quest is a two dimensional game where the user must try to reach the trophy at the end of the level without running into any enemies.
+
+
+# Build instructions 
+
+Use the gnu compiler and when you compile, include the sfml library.
