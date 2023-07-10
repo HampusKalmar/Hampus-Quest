@@ -8,8 +8,8 @@ class Environment
 {
   private:
     sf::Texture texture;
-    sf::Sprite m_groundSprites[60];
-    const int numBlocks = 60;
+    sf::Sprite m_groundSprites[80];
+    const int numBlocks = 80;
     const int groundHeight = 752;
 
   public:

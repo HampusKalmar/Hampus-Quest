@@ -8,13 +8,13 @@ Environment::Environment()
   }
   
   // Creates the blocks.
-  const int gapWidth = 60;
-  const int holeFrequency = 12;
-  const int negativeDeltaY = 100;
-  const int positiveDeltaY = -70;
+  const int gapWidth = 100;
+  std::vector<int> holeSequency = {12, 10, 8, 10, 5, 5, 10, 2, 6, 2, 2, 2, 6};
+  std::vector<int> deltaSequence = {70, -130, 40, -150, 100, 70, -130, 30, 70, -130, 70, -130, 70};
   int currentX = 0;
   int currentY = groundHeight;
-  bool increaseY = true;
+  int sequenceIndex = 0;
+  int blocksSinceLastHole = 0;
   for (int i = 0; i < numBlocks; i++)
   {
     m_groundSprites[i].setTexture(texture);
@@ -22,14 +22,13 @@ Environment::Environment()
     const int blockWidth = m_groundSprites[i].getGlobalBounds().width;
     m_groundSprites[i].setPosition(currentX, currentY + blockWidth);
     currentX += blockWidth;
-    if ((i + 1) % holeFrequency == 0)
+    blocksSinceLastHole++;
+    if (blocksSinceLastHole >= holeSequency[sequenceIndex])
     {
       currentX += gapWidth;
-      if (increaseY) {
-        currentY -= negativeDeltaY;
-      } else {
-        increaseY += positiveDeltaY;
-      }
+      currentY -= deltaSequence[sequenceIndex];
+      sequenceIndex = (sequenceIndex + 1) % deltaSequence.size();
+      blocksSinceLastHole = 0;
     }
   }
 }
