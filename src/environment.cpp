@@ -8,21 +8,28 @@ Environment::Environment()
   }
   
   // Creates the blocks.
-  const int blockWidth = texture.getSize().x;
-  const int gapWidth = 20;
-  const int holeFrequency = 6;
+  const int gapWidth = 60;
+  const int holeFrequency = 12;
+  const int negativeDeltaY = 100;
+  const int positiveDeltaY = -70;
+  int currentX = 0;
+  int currentY = groundHeight;
+  bool increaseY = true;
   for (int i = 0; i < numBlocks; i++)
   {
     m_groundSprites[i].setTexture(texture);
     m_groundSprites[i].setScale(1.5f, 1.5f);
-    //m_groundSprites[i].setPosition(i * texture.getSize().x, 752.f);
-    if (i % holeFrequency == 0)
+    const int blockWidth = m_groundSprites[i].getGlobalBounds().width;
+    m_groundSprites[i].setPosition(currentX, currentY + blockWidth);
+    currentX += blockWidth;
+    if ((i + 1) % holeFrequency == 0)
     {
-      continue;
-    }
-    else
-    {
-      m_groundSprites[i].setPosition(i * (blockWidth + gapWidth), groundHeight + blockWidth);
+      currentX += gapWidth;
+      if (increaseY) {
+        currentY -= negativeDeltaY;
+      } else {
+        increaseY += positiveDeltaY;
+      }
     }
   }
 }
@@ -43,6 +50,5 @@ std::vector<sf::Sprite> Environment::getSpriteBlocks() const
   {
     sprites.push_back(sprite);
   }  
-  //return std::vector<sf::Sprite>(std::begin(m_groundSprites), std::end(m_groundSprites));
   return sprites;
 }
