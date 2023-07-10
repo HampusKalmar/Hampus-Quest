@@ -1,15 +1,23 @@
 #include "../include/background.h"
 
-void Background::backgroundColor(sf::RenderTarget& target, const sf::Color& topColor, const sf::Color& bottomColor)
+Background::Background() 
 {
-    sf::RectangleShape topHalf(sf::Vector2f(target.getSize().x, target.getSize().y / 2));
-    topHalf.setPosition(0, 0);
-    topHalf.setFillColor(topColor);
+  if (!texture.loadFromFile("assets/images/gameBackground.png"))
+  {
+    std::cout << "Failed to load image" << std::endl;
+  }
+  
+  backgroundSprite.setTexture(texture);
+  backgroundSprite.setScale(8.0f, 8.0f);
+  texture.setRepeated(true);
+}
 
-    sf::RectangleShape bottomHalf(sf::Vector2f(target.getSize().x, target.getSize().y / 2));
-    bottomHalf.setPosition(0, target.getSize().y / 2);
-    bottomHalf.setFillColor(bottomColor);
+void Background::setBackground(sf::RenderWindow& window, const sf::View &view)
+{
+  sf::Vector2f viewCenter = view.getCenter();
+  sf::Vector2f viewSize = view.getSize();
+  backgroundSprite.setPosition(viewCenter.x - viewSize.x / 2.0f, viewCenter.y - viewSize.y / 2.0f);
 
-    target.draw(topHalf);
-    target.draw(bottomHalf);
+  backgroundSprite.setTextureRect(sf::IntRect(0, 0, window.getSize().x, window.getSize().y));
+  window.draw(backgroundSprite);
 }

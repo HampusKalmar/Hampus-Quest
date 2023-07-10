@@ -44,6 +44,8 @@ void Game::setCamera()
 void Game::drawGameObjects()
 {
   gameWindow.clear(sf::Color(0, 0, 70));
+  view = gameWindow.getView();
+  background.setBackground(gameWindow, view);
   gameWindow.draw(enemy.getEnemySprite());
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);

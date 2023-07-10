@@ -31,6 +31,7 @@ class Game
     sf::Texture trophyTexture;
     sf::Sprite trophySprite;
     sf::Font font;
+    sf::View view;
     sf::Font gameOverFont;
     sf::Text congratulationsText;
     sf::Text gameOverText;

@@ -7,10 +7,11 @@ class Background
 {
   private:
     sf::Texture texture;
-    sf::Sprite sprite;
+    sf::Sprite backgroundSprite;
 
   public:
-    void backgroundColor(sf::RenderTarget& target, const sf::Color& topColor, const sf::Color& bottomColor);
+    Background();
+    void setBackground(sf::RenderWindow& window, const sf::View &view);
 };
 
 #endif
