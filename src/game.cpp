@@ -49,6 +49,7 @@ void Game::drawGameObjects()
   gameWindow.draw(enemy.getEnemySprite());
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);
+  environment.drawStones(gameWindow);
   gameWindow.draw(player.getSprite());
   gameWindow.draw(getTrophySprite());
   player.playerAnimation();
