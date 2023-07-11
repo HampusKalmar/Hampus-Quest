@@ -78,7 +78,7 @@ void Game::gameCollision()
     theGameIsOver = true;
   }
 
-  float fallingThreshold = 950.0f;
+  float fallingThreshold = 1200.0f;
 
   if (player.getSprite().getPosition().y > fallingThreshold)
   {
@@ -108,10 +108,12 @@ void Game::gameCollision()
 void Game::handleEvents()
 {
   while (gameWindow.pollEvent(event))
-  {
-    mainMenu->handleEvent(event);
-    gameOverMenu->handleGameOverMenuEvent(event);
-  
+  { 
+    if (theGameIsOver) {
+      gameOverMenu->handleGameOverMenuEvent(event);
+    } else {
+      mainMenu->handleEvent(event);
+    }
     if (event.type == sf::Event::Closed)
     {
       gameWindow.close();
@@ -127,6 +129,7 @@ void Game::gameLoop()
   gameWindow.setActive(true);
   theGameIsOver = false;
   gameStarted = false;
+  bool isGameOverMenuActive = false;
 
   while (gameWindow.isOpen())
   {
@@ -143,12 +146,6 @@ void Game::gameLoop()
       sound->gameMusic();
     }
 
-    if (gameOverMenu->isExitTheGamePressed())
-    {
-      gameStarted = false;
-      gameWindow.close();
-    }
-
     if (gameStarted)
     {
       if (!theGameIsOver)
@@ -157,20 +154,9 @@ void Game::gameLoop()
         setCamera();
         drawGameObjects();
       }
-
-      if (!theGameIsOver)
-      {
-        if (!inGameMusicIsPlaying)
-        {
-          sound->gameMusic();
-          inGameMusicIsPlaying = true;
-        }
-      }
       else
       {
-        gameWindow.clear();
-        gameOverMenu->displayMenu(gameWindow, player.getSprite());
-        gameWindow.display();
+        isGameOverMenuActive = true;
       }
     }
     else
@@ -180,6 +166,29 @@ void Game::gameLoop()
       {
         sound->menuMusic();
         menuMusicIsPlaying = true;
+      }
+    }
+
+    if (isGameOverMenuActive)
+    {
+      gameWindow.clear();
+      gameOverMenu->displayMenu(gameWindow, player.getSprite());
+      gameWindow.display();
+
+      if (gameOverMenu->isRestartGamePressed())
+      {
+        resetGame();
+        drawGameObjects();
+        sound->gameMusic();
+        isGameOverMenuActive = false;
+        gameStarted = true;
+        theGameIsOver = false;
+      }
+
+      if (gameOverMenu->isExitTheGamePressed())
+      {
+        gameStarted = false;
+        gameWindow.close();
       }
     }
   }
@@ -214,6 +223,11 @@ void Game::gameWon()
 sf::Sprite Game::getTrophySprite()
 {
   return trophySprite;
+}
+
+void Game::resetGame()
+{
+  player.resetPlayer();
 }
 
 /**

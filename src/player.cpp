@@ -16,6 +16,11 @@ Player::Player()
   sprite.move(sf::Vector2f(0, 9.81f));
 }
 
+void Player::resetPlayer()
+{
+  sprite.setPosition(50, 700);
+}
+
 /**
  * Method to make the player be able to jump.
  */

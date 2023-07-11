@@ -18,9 +18,14 @@ GameOverMenu::GameOverMenu()
   gameOverText.setFillColor(sf::Color::White);
 
   exitTheGameText.setFont(font);
-  exitTheGameText.setString("Press escape to exit the game and then retry");
+  exitTheGameText.setString("Press escape to exit the game");
   exitTheGameText.setCharacterSize(25);
   exitTheGameText.setFillColor(sf::Color::White);
+
+  retryText.setFont(font);
+  retryText.setString("Press the 'R' key to restart the game");
+  retryText.setCharacterSize(25);
+  retryText.setFillColor(sf::Color::White);
 }
 
 
@@ -32,6 +37,10 @@ void GameOverMenu::handleGameOverMenuEvent(sf::Event& event)
     {
       exitPressed = true;
     }
+    if (event.key.code == sf::Keyboard::R)
+    {
+      restartPressed = true;
+    }
   }
 
    if (event.type == sf::Event::KeyReleased)
@@ -39,6 +48,10 @@ void GameOverMenu::handleGameOverMenuEvent(sf::Event& event)
     if (event.key.code == sf::Keyboard::Escape)
     {
       exitPressed = false;
+    }
+    if (event.key.code == sf::Keyboard::R)
+    {
+      restartPressed = false;
     }
   }
 }
@@ -52,11 +65,13 @@ void GameOverMenu::displayMenu(sf::RenderWindow& window, const sf::Sprite& playe
 
   sf::Vector2f menuPosition(playerPosition.x - (windowSize.x / 2), playerPosition.y - (windowSize.y / 2));
 
-  exitTheGameText.setPosition(menuPosition.x + 90.f, menuPosition.y + 350.f);
-  gameOverText.setPosition(menuPosition.x + 360.f, menuPosition.y + 250.f);
+  exitTheGameText.setPosition(menuPosition.x + 208.f, menuPosition.y + 300.f);
+  retryText.setPosition(menuPosition.x + 155.f, menuPosition.y + 220.f);
+  gameOverText.setPosition(menuPosition.x + 348.f, menuPosition.y + 100.f);
 
   window.draw(gameOverText);
   window.draw(exitTheGameText);
+  window.draw(retryText);
   window.display();
 }
 
@@ -64,6 +79,18 @@ void GameOverMenu::displayMenu(sf::RenderWindow& window, const sf::Sprite& playe
 bool GameOverMenu::isExitTheGamePressed() const
 {
   if (exitPressed)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+bool GameOverMenu::isRestartGamePressed() const
+{
+  if (restartPressed)
   {
     return true;
   }
