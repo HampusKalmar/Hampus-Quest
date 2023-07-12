@@ -211,7 +211,12 @@ void Game::gameWon()
   congratulationsText.setString("Congratulations! You have won the game");
   congratulationsText.setCharacterSize(20);
   congratulationsText.setFillColor(sf::Color::White);
-  congratulationsText.setPosition(700, 400);
+
+  sf::Vector2f center = gameWindow.getView().getCenter();
+
+  sf::FloatRect textRect = congratulationsText.getLocalBounds();
+  congratulationsText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+  congratulationsText.setPosition(center);
 
   gameWindow.draw(congratulationsText);
   gameWindow.display();

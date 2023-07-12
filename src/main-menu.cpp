@@ -19,19 +19,19 @@ MainMenu::MainMenu()
   headerText.setFont(font);
   headerText.setString("Hampus Quest");
   headerText.setCharacterSize(80);
-  headerText.setFillColor(sf::Color::White);
+  headerText.setFillColor(sf::Color::Black);
   headerText.setPosition(120.f, 50.f);
 
   playText.setFont(font);
   playText.setString("Press enter to play");
   playText.setCharacterSize(40);
-  playText.setFillColor(sf::Color::White);
+  playText.setFillColor(sf::Color::Black);
   playText.setPosition(200.f, 200.f);
 
   exitText.setFont(font);
   exitText.setString("press escape to exit");
   exitText.setCharacterSize(40);
-  exitText.setFillColor(sf::Color::White);
+  exitText.setFillColor(sf::Color::Black);
   exitText.setPosition(200.f, 350.f);
 }
 
@@ -65,7 +65,7 @@ void MainMenu::handleEvent(sf::Event& event)
 void MainMenu::displayMenu(sf::RenderWindow& window)
 {
   mousePos = sf::Mouse::getPosition(window);
-  window.clear(sf::Color(0, 0, 70));
+  window.clear(sf::Color(218, 118, 0));
   window.draw(headerText);
   window.draw(playText);
   window.draw(exitText);
