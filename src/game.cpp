@@ -12,8 +12,8 @@ Game::Game() :
     std::cout << "Could not load the trophy texture" << std::endl;
   }
   trophySprite.setTexture(trophyTexture);
-  trophySprite.setScale(1.5f, 1.5f);
-  trophySprite.setPosition(993, 747);
+  trophySprite.setScale(2.0f, 2.0f);
+  trophySprite.setPosition(5000, 972);
 }
 
 /**

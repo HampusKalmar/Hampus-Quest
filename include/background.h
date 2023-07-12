@@ -8,12 +8,8 @@
 class Background
 {
   private:
-    sf::Texture textureOne;
-    sf::Texture textureTwo;
-    sf::Texture texturePlain;
-    sf::Sprite backgroundSpriteOne;
-    sf::Sprite backgroundSpriteTwo;
-    sf::Sprite backgroundSpritePlain;
+    sf::Texture texture;
+    sf::Sprite backgroundSprite;
     sf::Sprite sprite;
 
   public:
