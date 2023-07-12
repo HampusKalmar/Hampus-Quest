@@ -11,7 +11,10 @@ class Enemy
     sf::Texture textureTwo;
     sf::Texture textureThree;
     sf::Sprite sprite;
-    sf::Clock clock;
+    std::vector<sf::Sprite> sprites;
+    std::vector<bool> isEnemyMovingRight;
+    std::vector<sf::Vector2f> initialPosition;
+    sf::Clock clock; 
     bool isMovingRight = false;
     float timer;
     float deltaTime;
@@ -19,11 +22,12 @@ class Enemy
 
   public:
     Enemy();
-    void leftEnemyMovement();
-    void rightEnemyMovement();
+    void leftEnemyMovement(sf::Sprite& enemySprite, float leftBoundary);
+    void rightEnemyMovement(sf::Sprite& enemySprite, float rightBoundary);
     void updateEnemyMovement();
     void enemyAnimation();
-    sf::Sprite getEnemySprite() const;
+    void addEnemies(const std::vector<sf::Vector2f>& positions);
+    std::vector<sf::Sprite>& getEnemySprites();
 };
 
 #endif

@@ -46,7 +46,10 @@ void Game::drawGameObjects()
   gameWindow.clear(sf::Color(0, 0, 70));
   view = gameWindow.getView();
   background.setBackground(gameWindow, view);
-  gameWindow.draw(enemy.getEnemySprite());
+  for (const auto& sprite : enemy.getEnemySprites())
+  {
+    gameWindow.draw(sprite);
+  }
   gameWindow.draw(secondEnemy.getSecondEnemySprite());
   environment.drawGround(gameWindow);
   environment.drawStones(gameWindow);
@@ -66,10 +69,13 @@ void Game::drawGameObjects()
  */
 void Game::gameCollision()
 {
-  if (collision.checkSpriteCollision(player.getSprite(), enemy.getEnemySprite()))
+  for (const auto& sprite : enemy.getEnemySprites())
   {
-    sound->stopGameMusic();
-    theGameIsOver = true;
+    if (collision.checkSpriteCollision(player.getSprite(), sprite))
+    {
+      sound->stopGameMusic();
+      theGameIsOver = true;
+    }
   }
 
   if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
