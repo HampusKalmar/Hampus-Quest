@@ -5,48 +5,53 @@ SecondEnemy::SecondEnemy()
   textureOne.loadFromFile("assets/images/secondEnemy1.png");
   textureTwo.loadFromFile("assets/images/secondEnemy2.png");
 
-  sprite.setTexture(textureOne);
-  sprite.setScale(1.7f, 1.7f);
-  sprite.setPosition(600, 700);
+  addEnemies({sf::Vector2f(600, 700), sf::Vector2f(800, 800), sf::Vector2f(1000, 800)});
 
   timer = 0.0f;
   animationStep = 0;
 }
 
-void SecondEnemy::upEnemyMovement()
+void SecondEnemy::upEnemyMovement(sf::Sprite& enemySprite, float upBoundary)
 {
-  if (sprite.getPosition().y > 400.0f)
+  if (enemySprite.getPosition().y > upBoundary)
   {
-    sprite.move(sf::Vector2f(0.0f, -2.2f));
+    enemySprite.move(sf::Vector2f(0.f, -1.17f));
   }
 }
 
-void SecondEnemy::downEnemyMovement()
+void SecondEnemy::downEnemyMovement(sf::Sprite& enemySprite, float downBoundary)
 {
-   if (sprite.getPosition().y < 700.0f)
+  if (enemySprite.getPosition().y < downBoundary)
   {
-    sprite.move(sf::Vector2f(0.0f, 2.2f));
+    enemySprite.move(sf::Vector2f(0.f, 1.17f));
   }
 }
 
 void SecondEnemy::updateSecondEnemyMovement()
 {
-    if (sprite.getPosition().y <= 400.0f)
+  for (size_t i = 0; i < sprites.size(); ++i)
   {
-    isMovingUp = false;
-  }
-  else if (sprite.getPosition().y >= 700.0f)
-  {
-    isMovingUp = true;
-  }
+    auto& sprite = sprites[i];
+    float upBoundary = initialPos[i].y - 180;
+    float downBoundary = initialPos[i].y + 50;
 
-  if (isMovingUp)
-  {
-    upEnemyMovement();
-  }
-  else
-  {
-    downEnemyMovement();
+    if (sprite.getPosition().y <= upBoundary)
+    {
+      isEnemyMovingUp[i] = false;
+    }
+    else if (sprite.getPosition().y >= downBoundary)
+    {
+      isEnemyMovingUp[i] = true;
+    }
+
+    if (isEnemyMovingUp[i])
+    {
+      upEnemyMovement(sprite, upBoundary);
+    }
+    else
+    {
+      downEnemyMovement(sprite, downBoundary);
+    }
   }
 }
 
@@ -58,18 +63,37 @@ void SecondEnemy::secondEnemyAnimation()
   {
     timer -= 0.22f;
     animationStep = (animationStep + 1) % 2;
-    if (animationStep == 0)
+
+    for (auto& sprite : sprites)
     {
-      sprite.setTexture(textureOne);
-    }
-    else if (animationStep == 1)
-    {
-      sprite.setTexture(textureTwo);
+      if (animationStep == 0)
+      {
+        sprite.setTexture(textureOne);
+      }
+      else if (animationStep == 1)
+      {
+        sprite.setTexture(textureTwo);
+      }
     }
   }
 }
 
-sf::Sprite SecondEnemy::getSecondEnemySprite() const
+void SecondEnemy::addEnemies(const std::vector<sf::Vector2f>& positions)
 {
-  return sprite;
+  for (const auto& pos : positions)
+  {
+    sf::Sprite sprite;
+    sprite.setTexture(textureOne);
+    sprite.setScale(2.0f, 2.0f);
+    sprite.setPosition(pos);
+    sprites.push_back(sprite);
+
+    isEnemyMovingUp.push_back(true);
+    initialPos.push_back(pos);
+  }
+}
+
+std::vector<sf::Sprite>& SecondEnemy::getSecondEnemySprite()
+{
+  return sprites;
 }

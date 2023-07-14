@@ -14,7 +14,7 @@ Enemy::Enemy()
 
 void Enemy::leftEnemyMovement(sf::Sprite& enemySprite, float leftBoundary)
 {
-   if (enemySprite.getPosition().x > leftBoundary)
+  if (enemySprite.getPosition().x > leftBoundary)
   {
     enemySprite.move(sf::Vector2f(- 1.17f, 0.f));
   }
@@ -22,7 +22,7 @@ void Enemy::leftEnemyMovement(sf::Sprite& enemySprite, float leftBoundary)
 
 void Enemy::rightEnemyMovement(sf::Sprite& enemySprite, float rightBoundary)
 {
-   if (enemySprite.getPosition().x < rightBoundary)
+  if (enemySprite.getPosition().x < rightBoundary)
   {
     enemySprite.move(sf::Vector2f(1.17f, 0.f));
   }

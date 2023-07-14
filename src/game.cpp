@@ -43,16 +43,19 @@ void Game::setCamera()
  */
 void Game::drawGameObjects()
 {
-  gameWindow.clear(sf::Color(0, 0, 70));
   view = gameWindow.getView();
   background.setBackground(gameWindow, view);
+  environment.drawGround(gameWindow);
+  environment.drawStones(gameWindow);
   for (const auto& sprite : enemy.getEnemySprites())
   {
     gameWindow.draw(sprite);
   }
-  gameWindow.draw(secondEnemy.getSecondEnemySprite());
-  environment.drawGround(gameWindow);
-  environment.drawStones(gameWindow);
+
+  for (const auto& sprite : secondEnemy.getSecondEnemySprite())
+  {
+    gameWindow.draw(sprite);
+  }
   gameWindow.draw(player.getSprite());
   gameWindow.draw(getTrophySprite());
   player.playerAnimation();
@@ -78,11 +81,15 @@ void Game::gameCollision()
     }
   }
 
-  if (collision.checkSpriteCollision(player.getSprite(), secondEnemy.getSecondEnemySprite()))
+  for (const auto& sprite : secondEnemy.getSecondEnemySprite())
   {
-    sound->stopGameMusic();
-    theGameIsOver = true;
+    if (collision.checkSpriteCollision(player.getSprite(), sprite))
+    {
+      sound->stopGameMusic();
+      theGameIsOver = true;
+    }
   }
+ 
 
   float fallingThreshold = 1200.0f;
 
