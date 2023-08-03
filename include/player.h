@@ -45,6 +45,7 @@ class Player
     void resetVelocity();
     void fallingVelocity();
     void resetPlayer();
+    void setInitialJumpHeight(float y);
     sf::Sprite getSprite() const;
 };
 

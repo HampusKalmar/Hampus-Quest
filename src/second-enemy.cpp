@@ -5,7 +5,7 @@ SecondEnemy::SecondEnemy()
   textureOne.loadFromFile("assets/images/secondEnemy1.png");
   textureTwo.loadFromFile("assets/images/secondEnemy2.png");
 
-  addEnemies({sf::Vector2f(600, 700), sf::Vector2f(800, 800), sf::Vector2f(1000, 800)});
+  addEnemies({sf::Vector2f(600, 700), sf::Vector2f(1190, 790), sf::Vector2f(1660, 800),  sf::Vector2f(2580, 900)});
 
   timer = 0.0f;
   animationStep = 0;
@@ -84,12 +84,22 @@ void SecondEnemy::addEnemies(const std::vector<sf::Vector2f>& positions)
   {
     sf::Sprite sprite;
     sprite.setTexture(textureOne);
-    sprite.setScale(2.0f, 2.0f);
+    sprite.setScale(1.75f, 1.75f);
     sprite.setPosition(pos);
     sprites.push_back(sprite);
 
     isEnemyMovingUp.push_back(true);
     initialPos.push_back(pos);
+  }
+  adjustEnemyPositions();
+}
+
+void SecondEnemy::adjustEnemyPositions()
+{
+  for (size_t i = 0; i < sprites.size(); ++i)
+  {
+    auto& sprite = sprites[i];
+    sprite.setPosition(initialPos[i].x, sprite.getPosition().y);
   }
 }
 

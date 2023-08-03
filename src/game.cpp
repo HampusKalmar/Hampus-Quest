@@ -91,7 +91,7 @@ void Game::gameCollision()
   }
  
 
-  float fallingThreshold = 1200.0f;
+  float fallingThreshold = 1300.0f;
 
   if (player.getSprite().getPosition().y > fallingThreshold)
   {
@@ -108,6 +108,7 @@ void Game::gameCollision()
   if (isOnGround)
   {
     player.resetVelocity();
+    player.setInitialJumpHeight(player.getSprite().getPosition().y - player.getSprite().getGlobalBounds().height);
   }
   else 
   {

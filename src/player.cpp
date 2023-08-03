@@ -28,15 +28,14 @@ void Player::jumpPlayer(float deltaTime)
 {
   if (input.isUpKeyPressed())
   {
-    if (!isJumping && !isFalling)
+    if (!isJumping)
     {
       isJumping = true;
-      isOnGround = false;
       initialJumpHeight = sprite.getPosition().y;
       velocity.y = jumpVelocity;
       airTime = 0.0f;
     }
-    else if (isJumping && velocity.y < 0.0f && airTime < maxAirTime)
+    else if (airTime < maxAirTime)
     {
       velocity.y -= gravity * deltaTime;
     }
@@ -44,16 +43,17 @@ void Player::jumpPlayer(float deltaTime)
 
   if (isJumping)
   {
-    float descendingGravityDelta = gravity * 0.3f;
-    velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravity * deltaTime;
+    // float descendingGravityDelta = gravity * 0.3f;
+    // velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravity * deltaTime;
     airTime += deltaTime;
-    sprite.move(velocity * deltaTime);
+    sprite.move(0, velocity.y * deltaTime);
   
     if (sprite.getPosition().y >= initialJumpHeight)
     {
       isJumping = false;
-      sprite.setPosition(sprite.getPosition().x, initialJumpHeight);
+      isFalling = true;
       velocity.y = 0.0f;
+      airTime = 0.0f;
     }
   }
 
@@ -156,6 +156,11 @@ void Player::resetVelocity()
 void Player::fallingVelocity()
 {
   velocity.y += gravity * deltaTime + 22.0f;
+}
+
+void Player::setInitialJumpHeight(float y)
+{
+  initialJumpHeight = y;
 }
 
 /**

@@ -27,6 +27,7 @@ class SecondEnemy
     void updateSecondEnemyMovement();
     void secondEnemyAnimation();
     void addEnemies(const std::vector<sf::Vector2f>& positions);
+    void adjustEnemyPositions();
     std::vector<sf::Sprite>& getSecondEnemySprite();
 };
 
