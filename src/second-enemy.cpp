@@ -5,7 +5,7 @@ SecondEnemy::SecondEnemy()
   textureOne.loadFromFile("assets/images/secondEnemy1.png");
   textureTwo.loadFromFile("assets/images/secondEnemy2.png");
 
-  addEnemies({sf::Vector2f(600, 700), sf::Vector2f(1190, 790), sf::Vector2f(1660, 800),  sf::Vector2f(2580, 900)});
+  addEnemies({sf::Vector2f(600, 700), sf::Vector2f(1200, 790), sf::Vector2f(1695, 800),  sf::Vector2f(2660, 900), sf::Vector2f(3950, 900), sf::Vector2f(4560, 920), sf::Vector2f(5000, 950)});
 
   timer = 0.0f;
   animationStep = 0;

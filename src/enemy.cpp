@@ -6,7 +6,7 @@ Enemy::Enemy()
   textureTwo.loadFromFile("assets/images/enemySecond.png");
   textureThree.loadFromFile("assets/images/enemyFinal.png");
 
-  addEnemies({sf::Vector2f(200, 748), sf::Vector2f(1406, 808), sf::Vector2f(1950, 768)});
+  addEnemies({sf::Vector2f(200, 748), sf::Vector2f(1406, 808), sf::Vector2f(1970, 768), sf::Vector2f(2900, 820), sf::Vector2f(3500, 750)});
 
   timer = 0.0f;
   animationStep = 0;
@@ -96,6 +96,14 @@ void Enemy::addEnemies(const std::vector<sf::Vector2f>& positions)
 
     isEnemyMovingRight.push_back(true);
     initialPosition.push_back(pos);
+  }
+}
+
+void Enemy::resetEnemy()
+{
+  for (size_t i = 0; i < sprites.size(); ++i)
+  {
+    sprites[i].setPosition(initialPosition[i]);
   }
 }
 

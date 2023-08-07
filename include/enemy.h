@@ -26,6 +26,7 @@ class Enemy
     void rightEnemyMovement(sf::Sprite& enemySprite, float rightBoundary);
     void updateEnemyMovement();
     void enemyAnimation();
+    void resetEnemy();
     void addEnemies(const std::vector<sf::Vector2f>& positions);
     std::vector<sf::Sprite>& getEnemySprites();
 };

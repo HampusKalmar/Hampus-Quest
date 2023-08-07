@@ -16,9 +16,9 @@ Player::Player()
   sprite.move(sf::Vector2f(0, 9.81f));
 }
 
-void Player::resetPlayer()
+void Player::resetPlayer(float x, float y)
 {
-  sprite.setPosition(50, 700);
+  sprite.setPosition(x, y);
 }
 
 /**

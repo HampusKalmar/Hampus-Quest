@@ -6,6 +6,7 @@
 Game::Game() :
   gameWindow(sf::VideoMode(1000, 900), "Hampus Quest", sf::Style::Close | sf::Style::Titlebar)
 {
+  player.setSpawnPoint(50, 700);
   gameWindow.setFramerateLimit(30);
   if (!trophyTexture.loadFromFile("assets/images/trophy.png"))
   {
@@ -13,7 +14,7 @@ Game::Game() :
   }
   trophySprite.setTexture(trophyTexture);
   trophySprite.setScale(2.0f, 2.0f);
-  trophySprite.setPosition(5000, 972);
+  trophySprite.setPosition(5220, 972);
 }
 
 /**
@@ -246,7 +247,9 @@ sf::Sprite Game::getTrophySprite()
 
 void Game::resetGame()
 {
-  player.resetPlayer();
+  player.resetPlayer(50, 700);
+  enemy.resetEnemy();
+  gameOverMenu->reset();
 }
 
 /**

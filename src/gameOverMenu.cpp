@@ -99,3 +99,9 @@ bool GameOverMenu::isRestartGamePressed() const
     return false;
   }
 }
+
+void GameOverMenu::reset()
+{
+  exitPressed = false;
+  restartPressed = false;
+}

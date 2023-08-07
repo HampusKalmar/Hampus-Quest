@@ -35,6 +35,9 @@ class Player
     bool isJumping = false;
     bool isFalling = false;
 
+    float spawnPointX;
+    float spawnPointY;
+
   public:
     Player();
     void movePlayerRight();
@@ -44,8 +47,9 @@ class Player
     void playerAnimation();
     void resetVelocity();
     void fallingVelocity();
-    void resetPlayer();
+    void resetPlayer(float x, float y);
     void setInitialJumpHeight(float y);
+    void setSpawnPoint(float x, float y) { spawnPointX = x; spawnPointY = y; }
     sf::Sprite getSprite() const;
 };
 

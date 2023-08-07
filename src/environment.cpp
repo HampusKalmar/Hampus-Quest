@@ -12,11 +12,11 @@ Environment::Environment()
     std::cout << "Failed to load image" << std::endl;
   }
 
-  addStone({sf::Vector2f(440, 706), sf::Vector2f(1400, 766), sf::Vector2f(2700, 775), sf::Vector2f(3900, 805)});
+  addStone({sf::Vector2f(440, 706), sf::Vector2f(1400, 766), sf::Vector2f(2850, 775), sf::Vector2f(4050, 805)});
   
   // Creates the blocks.
-  const int gapWidth = 100;
-  std::vector<int> holeSequency = {12, 10, 8, 10, 5, 5, 10, 2, 6, 2, 2, 2, 6};
+  const int gapWidth = 120;
+  std::vector<int> holeSequency = {12, 10, 8, 10, 5, 7, 10, 2, 6, 2, 2, 2, 6};
   std::vector<int> deltaSequence = {70, -130, 40, -150, 100, 70, -130, 30, 70, -130, 70, -130, 70};
   int currentX = 0;
   int currentY = groundHeight;

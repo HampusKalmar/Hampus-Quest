@@ -23,6 +23,7 @@ class GameOverMenu
     GameOverMenu();
     void handleGameOverMenuEvent(sf::Event& event);
     void displayMenu(sf::RenderWindow& window, const sf::Sprite& playerSprite);
+    void reset();
     bool isExitTheGamePressed() const;
     bool isRestartGamePressed() const;
 };
