@@ -104,6 +104,7 @@ void Enemy::resetEnemy()
   for (size_t i = 0; i < sprites.size(); ++i)
   {
     sprites[i].setPosition(initialPosition[i]);
+    isMovingRight = false;
   }
 }
 

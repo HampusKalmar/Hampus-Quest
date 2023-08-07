@@ -19,6 +19,9 @@ Player::Player()
 void Player::resetPlayer(float x, float y)
 {
   sprite.setPosition(x, y);
+  resetVelocity();
+  isJumping = false;
+  isFalling = false;
 }
 
 /**
