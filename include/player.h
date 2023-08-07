@@ -47,6 +47,8 @@ class Player
     void playerAnimation();
     void resetVelocity();
     void fallingVelocity();
+    void setOnGround(bool onGround);
+    bool getOnGround() const;
     void resetPlayer(float x, float y);
     void setInitialJumpHeight(float y);
     void setSpawnPoint(float x, float y) { spawnPointX = x; spawnPointY = y; }

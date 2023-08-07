@@ -105,15 +105,17 @@ void Game::gameCollision()
     gameWon();
   }
 
-  bool isOnGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
-  if (isOnGround)
+  bool isCollidingWithGround = collision.checkSpriteCollisionWithGround(player.getSprite(), environment.getSpriteBlocks());
+  if (isCollidingWithGround)
   {
     player.resetVelocity();
+    player.setOnGround(true);
     player.setInitialJumpHeight(player.getSprite().getPosition().y - player.getSprite().getGlobalBounds().height);
   }
   else 
   {
     player.fallingVelocity();
+    player.setOnGround(false);
   }
 }
 

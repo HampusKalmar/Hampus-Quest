@@ -11,6 +11,7 @@ Player::Player()
   sprite.setScale(2.0f, 2.0f);
   sprite.setPosition(50, 700);
 
+  isOnGround = false;
   timer = 0.0f;
   animationStep = 0;
   sprite.move(sf::Vector2f(0, 9.81f));
@@ -29,7 +30,7 @@ void Player::resetPlayer(float x, float y)
  */
 void Player::jumpPlayer(float deltaTime)
 {
-  if (input.isUpKeyPressed())
+  if (input.isUpKeyPressed() && isOnGround)
   {
     if (!isJumping)
     {
@@ -37,6 +38,7 @@ void Player::jumpPlayer(float deltaTime)
       initialJumpHeight = sprite.getPosition().y;
       velocity.y = jumpVelocity;
       airTime = 0.0f;
+      isOnGround = false;
     }
     else if (airTime < maxAirTime)
     {
@@ -164,6 +166,16 @@ void Player::fallingVelocity()
 void Player::setInitialJumpHeight(float y)
 {
   initialJumpHeight = y;
+}
+
+void Player::setOnGround(bool onGround)
+{
+  isOnGround = onGround;
+}
+
+bool Player::getOnGround() const 
+{
+  return isOnGround;
 }
 
 /**

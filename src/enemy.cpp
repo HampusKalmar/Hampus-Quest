@@ -69,17 +69,23 @@ void Enemy::enemyAnimation()
     if (animationStep == 0)
     {
       for (auto& enemySprite : sprites)
+      {
         enemySprite.setTexture(textureOne);
+      }
     }
     else if (animationStep == 1)
     {
       for (auto& enemySprite : sprites)
+      {
         enemySprite.setTexture(textureTwo);
+      }  
     }
     else if (animationStep == 2)
     {
       for (auto& enemySprite : sprites)
+      {
         enemySprite.setTexture(textureThree);
+      }
     }
   }
 }
