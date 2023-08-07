@@ -1,17 +1,26 @@
 #include "../include/enemy.h"
 
+/**
+ * The enemy constructor. 
+ */
 Enemy::Enemy()
 {
   textureOne.loadFromFile("assets/images/enemyFirst.png");
   textureTwo.loadFromFile("assets/images/enemySecond.png");
   textureThree.loadFromFile("assets/images/enemyFinal.png");
 
-  addEnemies({sf::Vector2f(200, 748), sf::Vector2f(1406, 808), sf::Vector2f(1970, 768), sf::Vector2f(2900, 820), sf::Vector2f(3500, 750)});
+  addEnemies({sf::Vector2f(260, 748), sf::Vector2f(1450, 808), sf::Vector2f(1970, 768), sf::Vector2f(2900, 820), sf::Vector2f(3500, 750)});
 
   timer = 0.0f;
   animationStep = 0;
 }
 
+/**
+ * Moves the enemy sprite to the left until a certain boundary.
+ *
+ * @param enemySprite The sprite of the enemy to be moved.
+ * @param leftBoundary the leftmost position the enemy sprite can go to. 
+ */
 void Enemy::leftEnemyMovement(sf::Sprite& enemySprite, float leftBoundary)
 {
   if (enemySprite.getPosition().x > leftBoundary)
@@ -20,6 +29,12 @@ void Enemy::leftEnemyMovement(sf::Sprite& enemySprite, float leftBoundary)
   }
 }
 
+/**
+ * Moves the enemy sprite to the right until a certain boundary.
+ *
+ * @param enemySprite The sprite of the enemy.
+ * @param rightBoundary The righmost position the enemy can go to. 
+ */
 void Enemy::rightEnemyMovement(sf::Sprite& enemySprite, float rightBoundary)
 {
   if (enemySprite.getPosition().x < rightBoundary)
@@ -28,6 +43,9 @@ void Enemy::rightEnemyMovement(sf::Sprite& enemySprite, float rightBoundary)
   }
 }
 
+/**
+ * Updates the movement of all enemy sprites based on their boundarys. 
+ */
 void Enemy::updateEnemyMovement()
 {
   for (size_t i = 0; i < sprites.size(); ++i)
@@ -58,6 +76,9 @@ void Enemy::updateEnemyMovement()
   }
 }
 
+/**
+ * Animates all the enemy sprites based on a timer and changes their textures.
+ */
 void Enemy::enemyAnimation()
 {
   deltaTime = clock.restart().asSeconds();
@@ -90,21 +111,34 @@ void Enemy::enemyAnimation()
   }
 }
 
+/**
+ * Adds enemies to the game at specified positions.
+ *
+ * @param positions A vector containing positions where enemies should be added.
+ */
 void Enemy::addEnemies(const std::vector<sf::Vector2f>& positions)
 {
   for (const auto& pos : positions)
   {
     sf::Sprite sprite;
     sprite.setTexture(textureOne);
-    sprite.setScale(2.0f, 2.0f);
+    sprite.setScale(- 2.0f, 2.0f);
     sprite.setPosition(pos);
     sprites.push_back(sprite);
 
     isEnemyMovingRight.push_back(true);
     initialPosition.push_back(pos);
   }
+
+  if (!isEnemyMovingRight.back())
+  {
+    sprite.setScale(-2.0f, 2.0f);
+  }
 }
 
+/**
+ * Resets the the positions of all enemies.
+ */
 void Enemy::resetEnemy()
 {
   for (size_t i = 0; i < sprites.size(); ++i)
@@ -114,6 +148,9 @@ void Enemy::resetEnemy()
   }
 }
 
+/**
+ * Returns a reference to the vector containing all enemy sprites.
+ */
 std::vector<sf::Sprite>& Enemy::getEnemySprites()
 {
   return sprites;

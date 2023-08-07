@@ -1,5 +1,8 @@
 #include "../include/main-menu.h"
 
+/**
+ * The MainMenu constructor.
+ */
 MainMenu::MainMenu()
 {
   if (!font.loadFromFile("assets/fonts/slkscre.ttf"))
@@ -35,6 +38,11 @@ MainMenu::MainMenu()
   exitText.setPosition(200.f, 350.f);
 }
 
+/**
+ * Handles keyborads inputs.
+ *
+ * @param event Reference to the event object capturing input events.
+ */
 void MainMenu::handleEvent(sf::Event& event)
 {
   if (event.type == sf::Event::KeyPressed)
@@ -62,6 +70,11 @@ void MainMenu::handleEvent(sf::Event& event)
   }
 }
 
+/**
+ * Displays the main menu content on the provided window.
+ *
+ * @param window Reference to the window where the main menu will be displayed.
+ */
 void MainMenu::displayMenu(sf::RenderWindow& window)
 {
   mousePos = sf::Mouse::getPosition(window);
@@ -73,6 +86,9 @@ void MainMenu::displayMenu(sf::RenderWindow& window)
   window.display();
 }
 
+/**
+ * Checks if the 'Play' option has been selected, and returns true if it has.
+ */
 bool MainMenu::isPlayPressed() const
 {
   if (playPressed)
@@ -85,6 +101,9 @@ bool MainMenu::isPlayPressed() const
   }
 }
 
+/**
+ * Checks if the 'Exit' option has been selected, and returns true if it has.
+ */
 bool MainMenu::isExitPressed() const
 {
   if (exitPressed)

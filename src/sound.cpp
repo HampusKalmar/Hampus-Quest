@@ -1,5 +1,8 @@
 #include "../include/sound.h"
 
+/**
+ * Loads and plays the main menu song.
+ */
 int Sound::menuMusic()
 {
   if (!music.openFromFile("assets/sounds/songTwo.wav"))
@@ -14,11 +17,17 @@ int Sound::menuMusic()
   return 0;
 }
 
+/**
+ * Stops the song that is playing in the main menu.
+ */
 void Sound::stopMenuMusic()
 {
   music.stop();
 }
 
+/**
+ * Loads and plays the in-game music.
+ */
 int Sound::gameMusic()
 {
   if (!inGameMusic.openFromFile("assets/sounds/songOne.wav"))
@@ -32,6 +41,9 @@ int Sound::gameMusic()
   return 0;
 }
 
+/**
+ * Stops the music that is playing in-game.
+ */
 void Sound::stopGameMusic()
 {
   inGameMusic.stop();

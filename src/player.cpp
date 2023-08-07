@@ -27,6 +27,8 @@ void Player::resetPlayer(float x, float y)
 
 /**
  * Method to make the player be able to jump.
+ *
+ * @param deltaTime The time since the last frame update.
  */
 void Player::jumpPlayer(float deltaTime)
 {
@@ -48,8 +50,6 @@ void Player::jumpPlayer(float deltaTime)
 
   if (isJumping)
   {
-    // float descendingGravityDelta = gravity * 0.3f;
-    // velocity.y += (velocity.y >= 0.0f) ? -descendingGravityDelta : gravity * deltaTime;
     airTime += deltaTime;
     sprite.move(0, velocity.y * deltaTime);
   
@@ -94,7 +94,6 @@ void Player::movePlayerLeft()
   {
     sprite.move(sf::Vector2f(-5.20f, 0.f));
     sprite.setScale(- 2.0f, 2.0f);
-    // check deltaTime here and in movePlayerRight()!!!!!!!!
   }
 }
 
@@ -153,26 +152,47 @@ void Player::playerAnimation()
   }
 }
 
+/**
+ * Resets the vertical velocity of the player.
+ */
 void Player::resetVelocity()
 {
   velocity.y = 0.0f;
 }
 
+/**
+ * Modifies the players vertical velocity to simulate falling.
+ */
 void Player::fallingVelocity()
 {
   velocity.y += gravity * deltaTime + 22.0f;
 }
 
+/**
+ * Sets the initial jump height for the player.
+ *
+ * @param y The initial height value to set for the jump.
+ */
 void Player::setInitialJumpHeight(float y)
 {
   initialJumpHeight = y;
 }
 
+/**
+ * Sets the on-ground status of the player.
+ *
+ * @param onGround A boolean value indicating if the player is standing on the ground or not.
+ */
 void Player::setOnGround(bool onGround)
 {
   isOnGround = onGround;
 }
 
+/**
+ * Returns the on-ground status of the player.
+ *
+ * @return Returns true if the player is on the ground, otherwise false.
+ */
 bool Player::getOnGround() const 
 {
   return isOnGround;
@@ -180,6 +200,8 @@ bool Player::getOnGround() const
 
 /**
  * Returns a copy of the sprite associated with the player object.
+ *
+ * @return A copy of the player sprite. 
  */
 sf::Sprite Player::getSprite() const
 {
