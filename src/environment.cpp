@@ -1,5 +1,8 @@
 #include "../include/environment.h"
 
+/**
+ * The Environment class constructor.
+ */
 Environment::Environment()
 {
   if (!texture.loadFromFile("assets/images/ground.png"))
@@ -40,6 +43,11 @@ Environment::Environment()
   }
 }
 
+/**
+ * Draws the ground blocks to the provided render window.
+ *
+ * @param window The SFML render window where the ground blocks will be drawn.
+ */
 void Environment::drawGround(sf::RenderWindow& window)
 {
   for (const auto& sprite : m_groundSprites)
@@ -48,6 +56,11 @@ void Environment::drawGround(sf::RenderWindow& window)
   }
 }
 
+/**
+ * Adds stone sprites to the environment at the specified positions.
+ *
+ * @param positions A vector of positions where the stones should be placed. 
+ */
 void Environment::addStone(const std::vector<sf::Vector2f>& positions)
 {
  for (const auto& pos : positions)
@@ -59,6 +72,11 @@ void Environment::addStone(const std::vector<sf::Vector2f>& positions)
   }
 }
 
+/**
+ * Draws the stone sprites to the provided render window.
+ * 
+ * @param window The SFML render window where the stones will be drawn.
+ */
 void Environment::drawStones(sf::RenderWindow& window)
 {
   for (const auto& sprite : stoneSprites)
@@ -67,6 +85,9 @@ void Environment::drawStones(sf::RenderWindow& window)
   }
 }
 
+/**
+ * Returns the sprites of the ground blocks in the environment. 
+ */
 std::vector<sf::Sprite> Environment::getSpriteBlocks() const
 {
   std::vector<sf::Sprite> sprites;

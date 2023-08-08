@@ -1,5 +1,8 @@
 #include "../include/second-enemy.h"
 
+/**
+ * The SecondEnemy constructor. 
+ */
 SecondEnemy::SecondEnemy()
 {
   textureOne.loadFromFile("assets/images/secondEnemy1.png");
@@ -11,6 +14,12 @@ SecondEnemy::SecondEnemy()
   animationStep = 0;
 }
 
+/**
+ * Moves the enemy sprite upwards if its above the specified boundary.
+ *
+ * @param enemySprite The sprite of the enemy that needs to be moved.
+ * @param upBoundary The upper boundary which determines whether the enemy need to be mobved up. 
+ */
 void SecondEnemy::upEnemyMovement(sf::Sprite& enemySprite, float upBoundary)
 {
   if (enemySprite.getPosition().y > upBoundary)
@@ -19,6 +28,12 @@ void SecondEnemy::upEnemyMovement(sf::Sprite& enemySprite, float upBoundary)
   }
 }
 
+/**
+ * Moves the enemy sprite downwards if its below the specified boundary.
+ * 
+ * @param enemySprite The sprite of the enemy that needds be moved.
+ * @param downBoundary The lower boundary.
+ */
 void SecondEnemy::downEnemyMovement(sf::Sprite& enemySprite, float downBoundary)
 {
   if (enemySprite.getPosition().y < downBoundary)
@@ -27,6 +42,9 @@ void SecondEnemy::downEnemyMovement(sf::Sprite& enemySprite, float downBoundary)
   }
 }
 
+/**
+ * Updates the movement of the SecondEnemy based on its current position. 
+ */
 void SecondEnemy::updateSecondEnemyMovement()
 {
   for (size_t i = 0; i < sprites.size(); ++i)
@@ -55,6 +73,9 @@ void SecondEnemy::updateSecondEnemyMovement()
   }
 }
 
+/**
+ * Animates the SecondEnemy sprites. 
+ */
 void SecondEnemy::secondEnemyAnimation()
 {
   deltaTime = clock.restart().asSeconds();
@@ -78,6 +99,11 @@ void SecondEnemy::secondEnemyAnimation()
   }
 }
 
+/**
+ * Adds enemies to the game at the specified positions.
+ *
+ * @param positions A vector of positions where the enemies should be placed. 
+ */
 void SecondEnemy::addEnemies(const std::vector<sf::Vector2f>& positions)
 {
   for (const auto& pos : positions)
@@ -94,6 +120,9 @@ void SecondEnemy::addEnemies(const std::vector<sf::Vector2f>& positions)
   adjustEnemyPositions();
 }
 
+/**
+ * Adjusts the enemy sprites to their initial x-position. 
+ */
 void SecondEnemy::adjustEnemyPositions()
 {
   for (size_t i = 0; i < sprites.size(); ++i)
@@ -103,6 +132,9 @@ void SecondEnemy::adjustEnemyPositions()
   }
 }
 
+/**
+ * Returns the sprites of the SecondEnemy. 
+ */
 std::vector<sf::Sprite>& SecondEnemy::getSecondEnemySprite()
 {
   return sprites;

@@ -1,5 +1,8 @@
 #include "../include/background.h"
 
+/**
+ * The Background constructor. 
+ */
 Background::Background() 
 {
   if (!texture.loadFromFile("assets/images/Background.png"))
@@ -13,6 +16,9 @@ Background::Background()
   texture.setRepeated(true);
 }
 
+/**
+ * Sets the background to the game. 
+ */
 void Background::setBackground(sf::RenderWindow& window, const sf::View &view)
 {
   sf::Vector2f viewCenter = view.getCenter();

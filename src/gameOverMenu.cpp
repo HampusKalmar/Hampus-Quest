@@ -1,5 +1,8 @@
 #include "../include/gameOverMenu.h"
 
+/**
+ * The GameOverMenu constructor.
+ */
 GameOverMenu::GameOverMenu()
 {
   if (!font.loadFromFile("assets/fonts/slkscre.ttf"))
@@ -28,7 +31,11 @@ GameOverMenu::GameOverMenu()
   retryText.setFillColor(sf::Color::Black);
 }
 
-
+/**
+ * Handles key events for the game over menu.
+ * 
+ * @param event The SFML event object that provides information about the users input.
+ */
 void GameOverMenu::handleGameOverMenuEvent(sf::Event& event)
 {
    if (event.type == sf::Event::KeyPressed)
@@ -56,6 +63,12 @@ void GameOverMenu::handleGameOverMenuEvent(sf::Event& event)
   }
 }
 
+/**
+ * Displays the game over menu on the screen.
+ * 
+ * @param window The SFML render window where the menu will be drawn.
+ * @param playerSprite The players sprite used to position the menu relative to the player.
+ */
 void GameOverMenu::displayMenu(sf::RenderWindow& window, const sf::Sprite& playerSprite)
 {
   window.clear(sf::Color(218, 118, 0));
@@ -75,7 +88,9 @@ void GameOverMenu::displayMenu(sf::RenderWindow& window, const sf::Sprite& playe
   window.display();
 }
 
-
+/**
+ * Checks if the "Escape" key has been pressed. 
+ */
 bool GameOverMenu::isExitTheGamePressed() const
 {
   if (exitPressed)
@@ -88,6 +103,9 @@ bool GameOverMenu::isExitTheGamePressed() const
   }
 }
 
+/**
+ * Checks if the "R" key has been pressed.
+ */
 bool GameOverMenu::isRestartGamePressed() const
 {
   if (restartPressed)
@@ -100,6 +118,9 @@ bool GameOverMenu::isRestartGamePressed() const
   }
 }
 
+/**
+ * Resets the state of the game over menu,
+ */
 void GameOverMenu::reset()
 {
   exitPressed = false;
